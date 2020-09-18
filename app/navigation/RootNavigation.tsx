@@ -5,6 +5,7 @@ import {LoginScreen} from '../screens/auth/login/LoginScreen';
 import {ForgotPasswordScreen} from './../screens/auth/forgortPassword/ForgotPasswordScreen';
 import {RegisterScreen} from './../screens/auth/register/RegisterScreen';
 import {HomeScreen} from './../screens/Home/HomeScreen';
+import {Drawer, DrawerNav} from './drawer/DrawerNav';
 import {navigationRef} from './NavigationService';
 import {AuthParamList} from './types/AuthParamList';
 import {HomeParamList} from './types/HomeparamList';
@@ -17,13 +18,11 @@ const HomeStack = createStackNavigator<HomeParamList>();
 const AuthStack = createStackNavigator<AuthParamList>();
 
 export const RootNavigator: React.FC<RootNavigatorProps> = ({theme}) => {
-  const isLoggedIn = false;
+  const isLoggedIn = true;
   return (
     <NavigationContainer ref={navigationRef} theme={theme}>
       {isLoggedIn ? (
-        <HomeStack.Navigator initialRouteName="Home">
-          <HomeStack.Screen name="Home" component={HomeScreen} />
-        </HomeStack.Navigator>
+        <DrawerNav />
       ) : (
         <AuthStack.Navigator
           screenOptions={{header: () => null}}
