@@ -10,6 +10,10 @@ import {PersistGate} from 'redux-persist/es/integration/react';
 import {RootNavigator} from './navigation/RootNavigation';
 import {persistor, store} from './store/configureStore';
 
+import 'react-native-gesture-handler';
+
+//TODO:implment react-native-vector-icons ios
+
 interface EntryPointProps {}
 
 const CustomDefaultTheme = {
