@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "778808264448",
+    "firebase_url": "https://lika-23ab9.firebaseio.com",
+    "project_id": "lika-23ab9",
+    "storage_bucket": "lika-23ab9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:778808264448:android:56da670100712b7fa215e5",
+        "android_client_info": {
+          "package_name": "com.likanativeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "778808264448-m1iikhj9qhfnuatm452go2a2rrsr943v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.likanativeapp",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "778808264448-po1f7ku96gtber8aoh8b3ucohb5euusf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeqH_nRLQOLeDttQ7h-fywlHoz2xNelLg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "778808264448-po1f7ku96gtber8aoh8b3ucohb5euusf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
