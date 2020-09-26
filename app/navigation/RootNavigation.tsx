@@ -2,9 +2,8 @@ import {NavigationContainer, Theme} from '@react-navigation/native';
 import React, {useState, useEffect} from 'react';
 import {DrawerNav} from './drawer/DrawerNav';
 import {navigationRef} from './NavigationService';
-//import firestore from '@react-native-firebase/firestore';
+import firestore from '@react-native-firebase/firestore';
 
-//const usersCollection = firestore().collection('Users');
 import auth from '@react-native-firebase/auth';
 import {Button} from 'react-native';
 
@@ -13,6 +12,7 @@ interface RootNavigatorProps {
 }
 
 //const AuthStack = createStackNavigator<AuthParamList>();
+const usersCollection = firestore().collection('Users');
 
 export const RootNavigator: React.FC<RootNavigatorProps> = ({theme}) => {
   // Set an initializing state whilst Firebase connects
@@ -20,6 +20,7 @@ export const RootNavigator: React.FC<RootNavigatorProps> = ({theme}) => {
   const [user, setUser] = useState<IUser>();
   // Handle user state changes
   function onAuthStateChanged(user: any) {
+    console.log('called auth state change');
     setUser(user);
     if (initializing) setInitializing(false);
   }
@@ -33,26 +34,34 @@ export const RootNavigator: React.FC<RootNavigatorProps> = ({theme}) => {
 
   // set ananymous auth
   const anonymousSignIn = () => {
-    console.log('test anaymousignin');
-    auth()
-      .signInAnonymously()
-      .then((user) => {
-        console.log(user.user.uid);
-        // const userDocument = firestore()
-        //   .collection('Users')
-        //   .doc(user.user.uid)
-        //   .set({
-        //     uid: user.user.uid,
-        //     isAnonymous: user.user.isAnonymous,
-        //   });
-        console.log('User signed in anonymously');
-      })
-      .catch((error) => {
-        if (error.code === 'auth/operation-not-allowed') {
-          console.log('Enable anonymous in your firebase console.');
-        }
-        console.error(error);
-      });
+    console.log('function anaymousignin');
+    if (!user) {
+      console.log('no user');
+      auth()
+        .signInAnonymously()
+        .then((user) => {
+          //console.log(user.user.uid);
+          // const userDocument = firestore()
+          //   .collection('Users')
+          //   .doc(user.user.uid)
+          //   .set({
+          //     uid: user.user.uid,
+          //     isAnonymous: user.user.isAnonymous,
+          //   });
+          console.log(user.user.uid);
+          console.log('User signed in anonymously');
+          //console.log(userDocument);
+        })
+        .catch((error) => {
+          if (error.code === 'auth/operation-not-allowed') {
+            console.log('Enable anonymous in your firebase console.');
+          }
+          console.error(error);
+        });
+      console.log(user);
+    } else {
+      console.log('user');
+    }
   };
 
   useEffect(() => {
@@ -63,7 +72,8 @@ export const RootNavigator: React.FC<RootNavigatorProps> = ({theme}) => {
   if (initializing) {
     console.log('initializing');
     return null;
-  } else if (!user) {
+  }
+  if (!user) {
     console.log('user not signed in');
     anonymousSignIn();
   }
