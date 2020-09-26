@@ -2,7 +2,9 @@ import {NavigationContainer, Theme} from '@react-navigation/native';
 import React, {useState, useEffect} from 'react';
 import {DrawerNav} from './drawer/DrawerNav';
 import {navigationRef} from './NavigationService';
+//import firestore from '@react-native-firebase/firestore';
 
+//const usersCollection = firestore().collection('Users');
 import auth from '@react-native-firebase/auth';
 import {Button} from 'react-native';
 
@@ -34,7 +36,15 @@ export const RootNavigator: React.FC<RootNavigatorProps> = ({theme}) => {
     console.log('test anaymousignin');
     auth()
       .signInAnonymously()
-      .then(() => {
+      .then((user) => {
+        console.log(user.user.uid);
+        // const userDocument = firestore()
+        //   .collection('Users')
+        //   .doc(user.user.uid)
+        //   .set({
+        //     uid: user.user.uid,
+        //     isAnonymous: user.user.isAnonymous,
+        //   });
         console.log('User signed in anonymously');
       })
       .catch((error) => {
