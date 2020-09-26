@@ -1,13 +1,7 @@
 import {NavigationContainer, Theme} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
 import React, {useState, useEffect} from 'react';
-import {LoginScreen} from '../screens/auth/login/LoginScreen';
-import {ForgotPasswordScreen} from './../screens/auth/forgortPassword/ForgotPasswordScreen';
-import {RegisterScreen} from './../screens/auth/register/RegisterScreen';
 import {DrawerNav} from './drawer/DrawerNav';
 import {navigationRef} from './NavigationService';
-import {AuthParamList} from './types/AuthParamList';
-import {HomeParamList} from './types/HomeparamList';
 
 import auth from '@react-native-firebase/auth';
 import {Button} from 'react-native';
@@ -16,12 +10,12 @@ interface RootNavigatorProps {
   theme: Theme;
 }
 
-const AuthStack = createStackNavigator<AuthParamList>();
+//const AuthStack = createStackNavigator<AuthParamList>();
 
 export const RootNavigator: React.FC<RootNavigatorProps> = ({theme}) => {
   // Set an initializing state whilst Firebase connects
   const [initializing, setInitializing] = useState(true);
-  const [user, setUser] = useState();
+  const [user, setUser] = useState<IUser>();
   // Handle user state changes
   function onAuthStateChanged(user: any) {
     setUser(user);
@@ -57,18 +51,15 @@ export const RootNavigator: React.FC<RootNavigatorProps> = ({theme}) => {
   }, []);
 
   if (initializing) {
-    console.log('inticalizing');
+    console.log('initializing');
     return null;
-  }
-
-  if (!user) {
+  } else if (!user) {
     console.log('user not signed in');
     anonymousSignIn();
   }
   return (
     <NavigationContainer ref={navigationRef} theme={theme}>
       <DrawerNav />
-      {console.log(user)}
       {/* button just to test ananymous sigin in after log out */}
       <Button title="Sigin out" onPress={signUserOut} />
     </NavigationContainer>
