@@ -2,17 +2,16 @@ import {NavigationContainer, Theme} from '@react-navigation/native';
 import React, {useState, useEffect} from 'react';
 import {DrawerNav} from './drawer/DrawerNav';
 import {navigationRef} from './NavigationService';
-import firestore from '@react-native-firebase/firestore';
-
 import auth from '@react-native-firebase/auth';
 import {Button, Text, View} from 'react-native';
+
+import {addAnonymousUser} from '../services/api/firebase/users';
 
 interface RootNavigatorProps {
   theme: Theme;
 }
 
 //const AuthStack = createStackNavigator<AuthParamList>();
-const usersCollection = firestore().collection('Users');
 let flag = true;
 export const RootNavigator: React.FC<RootNavigatorProps> = ({theme}) => {
   // Set an initializing state whilst Firebase connects
@@ -47,16 +46,9 @@ export const RootNavigator: React.FC<RootNavigatorProps> = ({theme}) => {
       .signInAnonymously()
       .then((user) => {
         console.log(user.user.uid);
-        const userDocument = firestore()
-          .collection('Users')
-          .doc(user.user.uid)
-          .set({
-            uid: user.user.uid,
-            isAnonymous: user.user.isAnonymous,
-          });
+        const userDocument = addAnonymousUser(user);
         console.log(user.user.uid);
         console.log('User signed in anonymously');
-        //console.log(userDocument);
       })
       .catch((error) => {
         if (error.code === 'auth/operation-not-allowed') {
