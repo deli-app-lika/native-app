@@ -3,9 +3,12 @@ import React, {useState, useEffect} from 'react';
 import {DrawerNav} from './drawer/DrawerNav';
 import {navigationRef} from './NavigationService';
 import auth from '@react-native-firebase/auth';
-import {Button, Text, View} from 'react-native';
+import {Alert, Button, Text, View} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 
 import {addAnonymousUser} from '../services/api/firebase/users';
+import {IUser} from '../models/user';
+import {setUserData} from '../actions/auth';
 
 interface RootNavigatorProps {
   theme: Theme;
@@ -17,6 +20,9 @@ export const RootNavigator: React.FC<RootNavigatorProps> = ({theme}) => {
   // Set an initializing state whilst Firebase connects
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState<IUser>();
+  // @ts-ignore
+  const state = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
   // Handle user state changes
   function onAuthStateChanged(user: any) {
@@ -37,6 +43,7 @@ export const RootNavigator: React.FC<RootNavigatorProps> = ({theme}) => {
     auth()
       .signOut()
       .then(() => console.log('User signed out!'));
+    //TODO update state to rest user state
   };
 
   // set ananymous auth
@@ -45,9 +52,20 @@ export const RootNavigator: React.FC<RootNavigatorProps> = ({theme}) => {
     auth()
       .signInAnonymously()
       .then((user) => {
-        console.log(user.user.uid);
-        const userDocument = addAnonymousUser(user);
-        console.log(user.user.uid);
+        //TODO review this. seems to be working the state.uid console log can be an old uid for now
+        // since user state not being cleared on sign out
+        //(but looks to be updated on a render any ways).
+        const newUser: IUser = {
+          uid: user.user.uid,
+          isLoggedIn: true,
+          isAnonymous: user.user.isAnonymous,
+          isNewUser: true,
+          location: {long: 0, lad: 0},
+        };
+        addAnonymousUser(newUser);
+        dispatch(setUserData(newUser));
+        console.log(newUser.uid);
+        console.log(state.uid);
         console.log('User signed in anonymously');
       })
       .catch((error) => {
