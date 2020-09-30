@@ -1,4 +1,4 @@
-import {LOG_OUT, UPDATE_USER} from '../actions/auth';
+import {LOG_OUT, UPDATE_USER, UPDATE_USER_LOCATION} from '../actions/auth';
 import {IUser} from '../models/user';
 
 const initialState = {
@@ -15,16 +15,20 @@ export const auth = (state = initialState, action: IAction) => {
   console.log('ACTION NOW', action);
   switch (action.type) {
     case UPDATE_USER:
-      console.log('in update user reducer');
       return {
+        ...state,
         isLoggedIn: true,
         isNewUser: action.data.isNewUser,
         uid: action.data.uid,
         isAnonymous: action.data.isAnonymous,
-        location: action.data.location,
+      };
+    case UPDATE_USER_LOCATION:
+      return {
+        ...state,
+        location: action.data,
       };
     case LOG_OUT: {
-      return initialState;
+      return {...initialState, location: action.data};
     }
     default:
       return state;
