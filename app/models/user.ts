@@ -1,3 +1,5 @@
+import {ILocation} from './location';
+
 export interface IUser {
   isLoggedIn: boolean;
   isNewUser: boolean;
@@ -7,6 +9,12 @@ export interface IUser {
     long: number | null;
     lad: number | null;
   };
+}
+
+export interface IAnonymousUser {
+  isNewUser: true;
+  isLoggedIn: false;
+  location: ILocation;
 }
 //everything except provider data and provider id.
 // const FireBase user auth example = {
