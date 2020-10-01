@@ -1,9 +1,14 @@
-import {LOG_OUT, UPDATE_USER, UPDATE_USER_LOCATION} from '../actions/auth';
-import {IUser} from '../models/user';
+import {
+  LOG_OUT,
+  UPDATE_USER,
+  UPDATE_USER_LOCATION,
+} from '../actions/authActions';
+import {IAnonymousUser, IUser} from '../models/user';
 
-const initialState = {
+const initialState: IAnonymousUser | IUser = {
   isNewUser: true,
   isLoggedIn: false,
+  location: {long: null, lat: null},
 };
 
 interface IAction {
