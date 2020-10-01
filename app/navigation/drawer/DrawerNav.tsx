@@ -35,6 +35,7 @@ const renderHomeStack = () => {
       if (Platform.OS === 'android') {
         // Calling the permission function
         getLocationPermission().then((granted) => {
+          //TODO move code back into location.ts and await her
           if (granted === PermissionsAndroid.RESULTS.GRANTED) {
             console.log('granted location permission');
             Geolocation.getCurrentPosition(
