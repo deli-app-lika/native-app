@@ -18,8 +18,8 @@ import {getLocationPermission} from '../../services/api/permissions/location';
 import {firestore} from 'firebase';
 import {useDispatch, useSelector} from 'react-redux';
 import {addAnonymousUser} from '../../services/api/firebase/users';
-import {setUserData, setUserLocation} from '../../actions/auth';
-import {formatLocation} from '../../services/helperMethods';
+import {setUserData, setUserLocation} from '../../actions/authActions';
+import {formatLocation} from '../../utils/helperMethods';
 
 export const Drawer = createDrawerNavigator();
 const HomeStack = createStackNavigator<HomeParamList>();

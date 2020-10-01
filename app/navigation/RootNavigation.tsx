@@ -8,8 +8,8 @@ import {useDispatch, useSelector} from 'react-redux';
 
 import {addAnonymousUser} from '../services/api/firebase/users';
 import {IUser} from '../models/user';
-import {setUserData, logout} from '../actions/auth';
-import {formatFirbaseUser} from '../services/helperMethods';
+import {setUserData, logout} from '../actions/authActions';
+import {formatFirbaseUser} from '../utils/helperMethods';
 
 interface RootNavigatorProps {
   theme: Theme;
