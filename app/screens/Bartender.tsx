@@ -10,6 +10,11 @@ import {
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 
 import {Card} from 'react-native-paper';
+import {createStackNavigator} from '@react-navigation/stack';
+import ScrollableTabView, {
+  ScrollableTabBar,
+} from 'react-native-scrollable-tab-view';
+//import ScrollableTabView from 'react-native-scrollable-tab-view';
 const TopTab = createMaterialTopTabNavigator();
 
 interface BartenderProps {}
@@ -31,149 +36,49 @@ function CategoryTabs({pressCategoryHandler}: any) {
   ];
   const categoriesToShow = categories.map((cat) => {
     return (
-      <Text
-        key={cat}
-        onPress={() => pressCategoryHandler(cat)}
-        style={{
-          marginHorizontal: 20,
-          marginVertical: 20,
-          borderColor: 'pink',
-          borderWidth: 2,
-        }}>
-        {cat}
-      </Text>
+      <View tabLabel={cat} key={cat} onPress={pressCategoryHandler}>
+        <CategoryScreen category={cat} />
+      </View>
     );
   });
   return (
-    <ScrollView
-      horizontal={true}
-      showsHorizontalScrollIndicator={false}
-      contentContainerStyle={{
-        alignItems: 'center',
-        paddingStart: 5,
-        paddingEnd: 5,
-      }}>
+    <ScrollableTabView
+      style={{
+        marginTop: 20,
+        marginLeft: 20,
+        marginRight: 20,
+      }}
+      initialPage={0}
+      tabBarInactiveTextColor="green"
+      tabBarUnderlineStyle={{}}
+      renderTabBar={() => <ScrollableTabBar style={{borderWidth: 0}} />}>
       {categoriesToShow}
-    </ScrollView>
+    </ScrollableTabView>
   );
 }
+const BartenderStack = createStackNavigator<any>();
 
 export const Bartender: React.FC<BartenderProps> = ({}) => {
-  const pressCategoryHandler = (category: any) => {
-    console.log(category);
-  };
-  const rum = 'rum';
   return (
-    <View style={{height: 100}}>
-      <View style={{flex: 3, borderColor: 'green', backgroundColor: 'green'}}>
-        <CategoryTabs pressCategoryHandler={pressCategoryHandler} />
-        {/* <Text
-            onPress={() => pressCategoryHandler(rum)}
-            style={{
-              marginHorizontal: 20,
-              marginVertical: 20,
-              borderColor: 'pink',
-              borderWidth: 2,
-            }}>
-            rum
-          </Text>
-          <Text
-            style={{
-              marginHorizontal: 20,
-              marginVertical: 20,
-              borderColor: 'pink',
-              borderWidth: 2,
-            }}>
-            rum
-          </Text>
-          <Text
-            style={{
-              marginHorizontal: 20,
-              marginVertical: 20,
-              borderColor: 'pink',
-              borderWidth: 2,
-            }}>
-            rum
-          </Text>
-          <Text
-            style={{
-              marginHorizontal: 20,
-              marginVertical: 20,
-              borderColor: 'pink',
-              borderWidth: 2,
-            }}>
-            rum
-          </Text>
-          <Text
-            style={{
-              marginHorizontal: 20,
-              marginVertical: 20,
-              borderColor: 'pink',
-              borderWidth: 2,
-            }}>
-            rum
-          </Text>
-          <Text
-            style={{
-              marginHorizontal: 20,
-              marginVertical: 20,
-              borderColor: 'pink',
-              borderWidth: 2,
-            }}>
-            rum
-          </Text>
-          <Text
-            style={{
-              marginHorizontal: 20,
-              marginVertical: 20,
-              borderColor: 'pink',
-              borderWidth: 2,
-            }}>
-            rum
-          </Text>
-          <Text
-            style={{
-              marginHorizontal: 20,
-              marginVertical: 20,
-              borderColor: 'pink',
-              borderWidth: 2,
-            }}>
-            rum
-          </Text>
-          <Text
-            style={{
-              marginHorizontal: 20,
-              marginVertical: 20,
-              borderColor: 'pink',
-              borderWidth: 2,
-            }}>
-            rum
-          </Text>
-          <Text
-            style={{
-              marginHorizontal: 20,
-              marginVertical: 20,
-              borderColor: 'pink',
-              borderWidth: 2,
-            }}>
-            rum
-          </Text>
-          <Text
-            style={{
-              marginHorizontal: 20,
-              marginVertical: 20,
-              borderColor: 'pink',
-              borderWidth: 2,
-            }}>
-            rum
-          </Text> */}
-      </View>
-    </View>
+    <BartenderStack.Navigator initialRouteName="Home">
+      <BartenderStack.Screen name="Home" component={Category} />
+    </BartenderStack.Navigator>
   );
 };
 
-{
-  /* <ScrollView>
-<MyTabs />
-</ScrollView> */
-}
+const Category = () => {
+  const pressCategoryHandler = (category: any) => {
+    console.log('test');
+  };
+  return (
+    // <View style={{height: 100}}>
+    //   <View style={{flex: 3, borderColor: 'green', backgroundColor: 'green'}}>
+    <CategoryTabs pressCategoryHandler={pressCategoryHandler} />
+    //   </View>
+    // // </View>
+  );
+};
+
+const CategoryScreen = (props: any) => {
+  return <Text>test cate {props.category}</Text>;
+};
