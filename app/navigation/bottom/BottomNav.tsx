@@ -1,13 +1,11 @@
-import React from 'react';
-import {View, Text} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {BaseRouter} from '@react-navigation/native';
+import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {BottomParmList} from './BottomParmList';
-import {Bartender} from '../../screens/Bartender';
-import {Search} from '../../screens/Search';
-import {Products} from '../../screens/Products';
 import {Favorites} from '../../screens/Favorites';
+import {Products} from '../../screens/Products';
+import {Search} from '../../screens/Search';
+import {BourbonCategories} from './../../screens/categories/BourbonCategories';
+import {BottomParmList} from './BottomParmList';
 
 interface BottomNavProps {}
 
@@ -41,7 +39,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({}) => {
         activeTintColor: 'tomato',
         inactiveTintColor: 'gray',
       }}>
-      <Tabs.Screen name="Bartender" component={Bartender} />
+      <Tabs.Screen name="Bartender" component={BourbonCategories} />
       <Tabs.Screen name="Search" component={Search} />
       <Tabs.Screen name="Products" component={Products} />
       <Tabs.Screen name="Favorites" component={Favorites} />
