@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
   },
   ScrollViewContianer: {
     flex: 1,
-    marginTop: 30,
+    // marginTop: 30,
   },
   ScrollView: {
     // backgroundColor: 'pink',
