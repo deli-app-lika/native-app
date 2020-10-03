@@ -1,10 +1,10 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {Bartender} from '../../screens/Bartender';
 import {Favorites} from '../../screens/Favorites';
 import {Products} from '../../screens/Products';
 import {Search} from '../../screens/Search';
-import {BourbonCategories} from './../../screens/categories/BourbonCategories';
 import {BottomParmList} from './BottomParmList';
 
 interface BottomNavProps {}
@@ -39,7 +39,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({}) => {
         activeTintColor: 'tomato',
         inactiveTintColor: 'gray',
       }}>
-      <Tabs.Screen name="Bartender" component={BourbonCategories} />
+      <Tabs.Screen name="Bartender" component={Bartender} />
       <Tabs.Screen name="Search" component={Search} />
       <Tabs.Screen name="Products" component={Products} />
       <Tabs.Screen name="Favorites" component={Favorites} />

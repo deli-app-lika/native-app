@@ -14,6 +14,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import ScrollableTabView, {
   ScrollableTabBar,
 } from 'react-native-scrollable-tab-view';
+import {Categories} from './categories/Categories';
 //import ScrollableTabView from 'react-native-scrollable-tab-view';
 const TopTab = createMaterialTopTabNavigator();
 
@@ -25,33 +26,37 @@ function CategoryTabs({pressCategoryHandler}: any) {
     'rum',
     'tequila',
     'wine',
-    'acohol1',
-    'acohol2',
-    'acohol3',
-    'acohol4',
-    'acohol5',
-    'acohol6',
-    'acohol7',
-    'acoho8',
+    'bourbon',
+    'gin',
+    'whiskey',
+    'vodka',
+    'liqueur',
   ];
   const categoriesToShow = categories.map((cat) => {
     return (
-      <View tabLabel={cat} key={cat} onPress={pressCategoryHandler}>
-        <CategoryScreen category={cat} />
-      </View>
+      //<View tabLabel={cat} key={cat} onPress={pressCategoryHandler}>
+      <Categories
+        category={cat}
+        //@ts-ignore
+        tabLabel={cat[0].toUpperCase() + cat.slice(1)}
+        key={cat}
+      />
+      //</View>
     );
   });
   return (
     <ScrollableTabView
       style={{
         marginTop: 20,
-        marginLeft: 20,
-        marginRight: 20,
       }}
       initialPage={0}
       tabBarInactiveTextColor="green"
       tabBarUnderlineStyle={{}}
-      renderTabBar={() => <ScrollableTabBar style={{borderWidth: 0}} />}>
+      renderTabBar={() => (
+        <ScrollableTabBar
+          style={{borderWidth: 0, marginLeft: 20, marginRight: 20}}
+        />
+      )}>
       {categoriesToShow}
     </ScrollableTabView>
   );
@@ -73,7 +78,7 @@ const Category = () => {
   return (
     // <View style={{height: 100}}>
     //   <View style={{flex: 3, borderColor: 'green', backgroundColor: 'green'}}>
-    <CategoryTabs pressCategoryHandler={pressCategoryHandler} />
+    <CategoryTabs />
     //   </View>
     // // </View>
   );

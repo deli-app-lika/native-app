@@ -5,16 +5,18 @@ import FastImage from 'react-native-fast-image';
 import {ActivityIndicator, Colors, Text} from 'react-native-paper';
 import ScrollView from 'rn-faded-scrollview';
 import {getCategoryCocktails} from '../../services/api/cocktails/categories';
-import {ICocktail} from './../../models/cocktail';
+import {ICocktail} from '../../models/cocktail';
 import styles from './style';
 
-interface BourbonCategoriesProps {}
+interface CategoriesProps {
+  category: string;
+}
 
-export const BourbonCategories: React.FC<BourbonCategoriesProps> = ({}) => {
+export const Categories: React.FC<CategoriesProps> = ({category}) => {
   const [cocktails, setCocktails] = useState<ICocktail[]>([]);
 
   const getCocktails = useCallback(async () => {
-    const fetchedCocktails = await getCategoryCocktails('bourbon');
+    const fetchedCocktails = await getCategoryCocktails(category);
     setCocktails(fetchedCocktails);
   }, []);
 
@@ -31,6 +33,7 @@ export const BourbonCategories: React.FC<BourbonCategoriesProps> = ({}) => {
     );
   }
   const renderCocktails = cocktails.map((cocktail) => {
+    console.log(cocktails);
     return (
       <View style={styles.Thumbnail} key={cocktail.uid}>
         <FastImage
@@ -47,6 +50,8 @@ export const BourbonCategories: React.FC<BourbonCategoriesProps> = ({}) => {
   });
 
   return (
+    //<View style={styles.container}>{renderCocktails}</View>
+
     <SafeAreaView style={styles.ScrollViewContianer}>
       <ScrollView
         allowStartFade={true}
