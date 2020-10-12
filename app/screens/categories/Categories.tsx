@@ -1,11 +1,12 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {SafeAreaView, View} from 'react-native';
+import {SafeAreaView, TouchableOpacity, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 // import {ScrollView} from 'react-native-gesture-handler';
 import {ActivityIndicator, Colors, Text} from 'react-native-paper';
 import ScrollView from 'rn-faded-scrollview';
-import {getCategoryCocktails} from '../../services/api/cocktails/categories';
 import {ICocktail} from '../../models/cocktail';
+import NavigationService from '../../navigation/NavigationService';
+import {getCategoryCocktails} from '../../services/api/cocktails/categories';
 import styles from './style';
 
 interface CategoriesProps {
@@ -33,19 +34,25 @@ export const Categories: React.FC<CategoriesProps> = ({category}) => {
     );
   }
   const renderCocktails = cocktails.map((cocktail) => {
-    console.log(cocktails);
     return (
-      <View style={styles.Thumbnail} key={cocktail.uid}>
-        <FastImage
-          style={styles.Image}
-          source={{
-            uri: cocktail.thumbnail,
-            priority: FastImage.priority.normal,
-          }}
-          resizeMode={FastImage.resizeMode.contain}
-        />
-        <Text style={styles.CocktailName}>{cocktail.name}</Text>
-      </View>
+      <TouchableOpacity
+        key={cocktail.uid}
+        onPress={() => {
+          NavigationService.navigate('Cocktail', cocktail);
+          // route.navigation.navigate('Cocktail');
+        }}>
+        <View style={styles.Thumbnail}>
+          <FastImage
+            style={styles.Image}
+            source={{
+              uri: cocktail.thumbnail,
+              priority: FastImage.priority.normal,
+            }}
+            resizeMode={FastImage.resizeMode.contain}
+          />
+          <Text style={styles.CocktailName}>{cocktail.name}</Text>
+        </View>
+      </TouchableOpacity>
     );
   });
 

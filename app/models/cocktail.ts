@@ -11,4 +11,6 @@ export interface ICocktail {
 export interface IIngredients {
   name: string;
   portion: string;
+  searchableName: string;
+  itemType: string[];
 }

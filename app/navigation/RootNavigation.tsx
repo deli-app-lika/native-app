@@ -1,15 +1,15 @@
-import {NavigationContainer, Theme} from '@react-navigation/native';
-import React, {useState, useEffect} from 'react';
-import {DrawerNav} from './drawer/DrawerNav';
-import {navigationRef} from './NavigationService';
 import auth from '@react-native-firebase/auth';
-import {Alert, Button, Text, View} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import { NavigationContainer, Theme } from '@react-navigation/native';
+import React, { useEffect, useState } from 'react';
+import { Button } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout, setUserData } from '../actions/authActions';
+import { IUser } from '../models/user';
+import { addAnonymousUser } from '../services/api/firebase/users';
+import { formatFirbaseUser } from '../utils/helperMethods';
+import { DrawerNav } from './drawer/DrawerNav';
+import { navigationRef } from './NavigationService';
 
-import {addAnonymousUser} from '../services/api/firebase/users';
-import {IUser} from '../models/user';
-import {setUserData, logout} from '../actions/authActions';
-import {formatFirbaseUser} from '../utils/helperMethods';
 
 interface RootNavigatorProps {
   theme: Theme;
