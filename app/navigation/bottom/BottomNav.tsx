@@ -9,6 +9,8 @@ import {BottomParmList} from './BottomParmList';
 
 interface BottomNavProps {}
 
+interface BartenderStackViewProps {}
+
 const Tabs = createBottomTabNavigator<BottomParmList>();
 
 export const BottomNav: React.FC<BottomNavProps> = ({}) => {

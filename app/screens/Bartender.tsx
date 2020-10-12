@@ -1,22 +1,11 @@
-import React from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  FlatList,
-  Pressable,
-  GestureResponderEvent,
-} from 'react-native';
-import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-
-import {Card} from 'react-native-paper';
 import {createStackNavigator} from '@react-navigation/stack';
+import React from 'react';
 import ScrollableTabView, {
   ScrollableTabBar,
 } from 'react-native-scrollable-tab-view';
+import {BartenderParamList} from '../navigation/types/BartenderParamList';
 import {Categories} from './categories/Categories';
-//import ScrollableTabView from 'react-native-scrollable-tab-view';
-const TopTab = createMaterialTopTabNavigator();
+import {Cocktail} from './cocktail/Cocktail';
 
 interface BartenderProps {}
 
@@ -34,7 +23,6 @@ function CategoryTabs({pressCategoryHandler}: any) {
   ];
   const categoriesToShow = categories.map((cat) => {
     return (
-      //<View tabLabel={cat} key={cat} onPress={pressCategoryHandler}>
       <Categories
         category={cat}
         //@ts-ignore
@@ -61,29 +49,19 @@ function CategoryTabs({pressCategoryHandler}: any) {
     </ScrollableTabView>
   );
 }
-const BartenderStack = createStackNavigator<any>();
+
+const BartenderStack = createStackNavigator<BartenderParamList>();
 
 export const Bartender: React.FC<BartenderProps> = ({}) => {
   return (
     <BartenderStack.Navigator initialRouteName="Home">
       <BartenderStack.Screen name="Home" component={Category} />
+      <BartenderStack.Screen name="Cocktail" component={Cocktail} />
     </BartenderStack.Navigator>
   );
 };
 
-const Category = () => {
-  const pressCategoryHandler = (category: any) => {
-    console.log('test');
-  };
-  return (
-    // <View style={{height: 100}}>
-    //   <View style={{flex: 3, borderColor: 'green', backgroundColor: 'green'}}>
-    <CategoryTabs />
-    //   </View>
-    // // </View>
-  );
-};
-
-const CategoryScreen = (props: any) => {
-  return <Text>test cate {props.category}</Text>;
+const Category = (props: any) => {
+  console.log('PROPS', props);
+  return <CategoryTabs />;
 };
