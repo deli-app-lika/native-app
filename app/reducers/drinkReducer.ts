@@ -1,4 +1,4 @@
-
-export const drinkReducer = ()=> {
-    return "";
-}
+const drinkReducer = () => {
+  return '';
+};
+export default drinkReducer;

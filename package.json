@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "tsc --noEmit && eslint --ext .js,.jsx,.ts,.tsx ./",
+    "prettier:write": "npx prettier --write **/*.{js,jsx,ts,tsx,json} && npx prettier --write *.{js,jsx,ts,tsx,json}"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.12.0",
@@ -40,8 +41,10 @@
     "react-native-vector-icons": "^7.1.0",
     "react-navigation": "^4.4.0",
     "react-redux": "^7.2.1",
+    "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.3.0",
     "rn-faded-scrollview": "^1.0.8",
     "yarn": "^1.22.10"
   },
@@ -56,15 +59,23 @@
     "@types/react-test-renderer": "^16.9.2",
     "@types/redux-logger": "^3.0.8",
     "@types/redux-persist": "^4.3.1",
-    "@typescript-eslint/eslint-plugin": "^2.27.0",
-    "@typescript-eslint/parser": "^2.27.0",
+    "@typescript-eslint/eslint-plugin": "^4.6.1",
+    "@typescript-eslint/parser": "^4.6.1",
     "babel-jest": "^25.1.0",
-    "eslint": "^6.5.1",
+    "eslint": "^7.12.1",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-airbnb-typescript": "^12.0.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^4.3.0",
     "jest": "^25.1.0",
     "metro-react-native-babel-preset": "^0.59.0",
+    "prettier": "^2.1.2",
+    "pretty-quick": "^3.1.0",
     "react-test-renderer": "16.13.1",
-    "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0",
     "typescript": "^3.8.3"
   },
   "jest": {
@@ -77,5 +88,10 @@
       "json",
       "node"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged && npm run lint"
+    }
   }
 }

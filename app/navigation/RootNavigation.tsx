@@ -5,40 +5,25 @@ import { Button } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, setUserData } from '../actions/authActions';
 import { IUser } from '../models/user';
-import { addAnonymousUser } from '../services/api/firebase/users';
+import addAnonymousUser from '../services/api/firebase/users';
 import { formatFirbaseUser } from '../utils/helperMethods';
 import { DrawerNav } from './drawer/DrawerNav';
 import { navigationRef } from './NavigationService';
-
 
 interface RootNavigatorProps {
   theme: Theme;
 }
 
-//const AuthStack = createStackNavigator<AuthParamList>();
+// const AuthStack = createStackNavigator<AuthParamList>();
 let flag = true;
-export const RootNavigator: React.FC<RootNavigatorProps> = ({theme}) => {
+const RootNavigator: React.FC<RootNavigatorProps> = ({ theme }) => {
   // Set an initializing state whilst Firebase connects
   const [initializing, setInitializing] = useState(true);
-  //firebaseAuth only used for geting/handling authFirebaseUser since it may be expensive to update user state on every firebaseAuthState update
+  // firebaseAuth only used for geting/handling authFirebaseUser since it may be expensive to update user state on every firebaseAuthState update
   const [firebaseAuthUser, setfirebaseAuthUser] = useState<IUser | null>();
   // @ts-ignore
-  const state = useSelector((state) => state.auth);
+  const state = useSelector((innerState) => innerState.auth);
   const dispatch = useDispatch();
-
-  // Handle user state changes
-  function onAuthStateChanged(user: any) {
-    if (flag) {
-      console.log('go - called auth state change');
-      setfirebaseAuthUser(user);
-      if (initializing) setInitializing(false);
-    } else {
-      console.log('no - called auth state change');
-      flag = true;
-      setfirebaseAuthUser(null);
-      anonymousSignIn();
-    }
-  }
 
   //  sign out
   const signUserOut = () => {
@@ -69,9 +54,24 @@ export const RootNavigator: React.FC<RootNavigatorProps> = ({theme}) => {
       });
   };
 
+  // Handle user state changes
+  function onAuthStateChanged(user: any) {
+    if (flag) {
+      console.log('go - called auth state change');
+      setfirebaseAuthUser(user);
+      if (initializing) setInitializing(false);
+    } else {
+      console.log('no - called auth state change');
+      flag = true;
+      setfirebaseAuthUser(null);
+      anonymousSignIn();
+    }
+  }
+
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber; // unsubscribe on unmount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (initializing) {
@@ -91,15 +91,4 @@ export const RootNavigator: React.FC<RootNavigatorProps> = ({theme}) => {
   );
 };
 
-{
-  /* <AuthStack.Navigator
-          screenOptions={{header: () => null}}
-          initialRouteName="Login">
-          <AuthStack.Screen name="Login" component={LoginScreen} />
-          <AuthStack.Screen name="Register" component={RegisterScreen} />
-          <AuthStack.Screen
-            name="ForgotPassword"
-            component={ForgotPasswordScreen}
-          />
-        </AuthStack.Navigator> */
-}
+export default RootNavigator;

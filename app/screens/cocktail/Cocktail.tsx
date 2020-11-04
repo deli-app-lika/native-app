@@ -1,36 +1,35 @@
-import React, {useCallback, useEffect} from 'react';
-import {Dimensions, ScrollView, View} from 'react-native';
+import React, { useCallback, useEffect } from 'react';
+import { Dimensions, ScrollView, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {Colors, IconButton, Text} from 'react-native-paper';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Colors, IconButton, Text } from 'react-native-paper';
 import NavigationService from '../../navigation/NavigationService';
-import {BartenderStackNavProps} from '../../navigation/types/BartenderParamList';
-import {ICocktail} from './../../models/cocktail';
-import {getIngredients} from './../../services/api/items/items';
+import { BartenderStackNavProps } from '../../navigation/types/BartenderParamList';
+import getIngredients from '../../services/api/items/items';
 import styles from './styles';
 
-interface CocktailProps {
-  cocktail: ICocktail;
-}
+// interface CocktailProps {
+//   cocktail: ICocktail;
+// }
 
-export const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({
-  route,
-}) => {
-  const {params} = route;
-  const height = Dimensions.get('window').height;
-  const width = Dimensions.get('window').width;
+const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
+  const { params } = route;
+  const { height } = Dimensions.get('window');
+  const { width } = Dimensions.get('window');
 
   const fetchInventory = useCallback(async () => {
     try {
       await getIngredients(params);
     } catch (e) {
-      //TODO: Redirect to auth screen and logout user
+      // TODO: Redirect to auth screen and logout user
       console.log(e);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     fetchInventory();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -53,10 +52,10 @@ export const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({
       </View>
       <View style={styles.cocktailImage}>
         <FastImage
-          style={{width: width, height: height * 0.25}}
+          style={{ width, height: height * 0.25 }}
           source={{
             uri: params.thumbnail,
-            priority: FastImage.priority.normal,
+            priority: FastImage.priority.normal
           }}
           // resizeMode={FastImage.resizeMode.contain}
         />
@@ -79,11 +78,11 @@ export const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({
               onPress={() => {}}
             />
             <FastImage
-              style={{width: 25, height: 50}}
+              style={{ width: 25, height: 50 }}
               source={{
                 uri:
                   'https://cdn3.alegra.com/69f2f33437015bd18c9e459aae41f6a319953c9b-1598478470-WhatsApp+Image+2020-08-26+at+4.30.48+PM+%282%29.jpeg?Expires=1602973251&Signature=nwOsqp9wmZdYGH1vad5Pk~YGrzldPUrnRa~GrG2I8SQfg2zClzru4-CWyur8fHKhrFvEI23SR2D-rIslek7vbr5~vSkDI96oA5je~FHqJfuXxlMQguCU77mguCdENrK6bMthQ8N2nsqdeg1Xzp6wMq2YPx~tn-TKowP7ToedaS8K1s1Mmuy7KdkPKmPUHWUze8q9mBWBsRYnZ2v38C8MSqTFafNLzIauRRSxzwDaBGL51l-~AO7mtb6V1pEY9MyxN3UOpe6LOf7QMMh4FTbsoSRwrheWBLDwGX6YmCorlPIAuTP8NII~lMrJZbNWtSO3~MgF5z-wXXRewnydFnlOSA__&Key-Pair-Id=APKAJU3VE62QBWZP27QQ',
-                priority: FastImage.priority.normal,
+                priority: FastImage.priority.normal
               }}
               // resizeMode={FastImage.resizeMode.contain}
             />
@@ -98,11 +97,11 @@ export const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({
               onPress={() => {}}
             />
             <FastImage
-              style={{width: 25, height: 50}}
+              style={{ width: 25, height: 50 }}
               source={{
                 uri:
                   'https://cdn3.alegra.com/69f2f33437015bd18c9e459aae41f6a319953c9b-1598478470-WhatsApp+Image+2020-08-26+at+4.30.48+PM+%282%29.jpeg?Expires=1602973251&Signature=nwOsqp9wmZdYGH1vad5Pk~YGrzldPUrnRa~GrG2I8SQfg2zClzru4-CWyur8fHKhrFvEI23SR2D-rIslek7vbr5~vSkDI96oA5je~FHqJfuXxlMQguCU77mguCdENrK6bMthQ8N2nsqdeg1Xzp6wMq2YPx~tn-TKowP7ToedaS8K1s1Mmuy7KdkPKmPUHWUze8q9mBWBsRYnZ2v38C8MSqTFafNLzIauRRSxzwDaBGL51l-~AO7mtb6V1pEY9MyxN3UOpe6LOf7QMMh4FTbsoSRwrheWBLDwGX6YmCorlPIAuTP8NII~lMrJZbNWtSO3~MgF5z-wXXRewnydFnlOSA__&Key-Pair-Id=APKAJU3VE62QBWZP27QQ',
-                priority: FastImage.priority.normal,
+                priority: FastImage.priority.normal
               }}
               // resizeMode={FastImage.resizeMode.contain}
             />
@@ -117,11 +116,11 @@ export const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({
               onPress={() => {}}
             />
             <FastImage
-              style={{width: 25, height: 50}}
+              style={{ width: 25, height: 50 }}
               source={{
                 uri:
                   'https://cdn3.alegra.com/69f2f33437015bd18c9e459aae41f6a319953c9b-1598478470-WhatsApp+Image+2020-08-26+at+4.30.48+PM+%282%29.jpeg?Expires=1602973251&Signature=nwOsqp9wmZdYGH1vad5Pk~YGrzldPUrnRa~GrG2I8SQfg2zClzru4-CWyur8fHKhrFvEI23SR2D-rIslek7vbr5~vSkDI96oA5je~FHqJfuXxlMQguCU77mguCdENrK6bMthQ8N2nsqdeg1Xzp6wMq2YPx~tn-TKowP7ToedaS8K1s1Mmuy7KdkPKmPUHWUze8q9mBWBsRYnZ2v38C8MSqTFafNLzIauRRSxzwDaBGL51l-~AO7mtb6V1pEY9MyxN3UOpe6LOf7QMMh4FTbsoSRwrheWBLDwGX6YmCorlPIAuTP8NII~lMrJZbNWtSO3~MgF5z-wXXRewnydFnlOSA__&Key-Pair-Id=APKAJU3VE62QBWZP27QQ',
-                priority: FastImage.priority.normal,
+                priority: FastImage.priority.normal
               }}
               // resizeMode={FastImage.resizeMode.contain}
             />
@@ -136,11 +135,11 @@ export const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({
               onPress={() => {}}
             />
             <FastImage
-              style={{width: 25, height: 50}}
+              style={{ width: 25, height: 50 }}
               source={{
                 uri:
                   'https://cdn3.alegra.com/69f2f33437015bd18c9e459aae41f6a319953c9b-1598478470-WhatsApp+Image+2020-08-26+at+4.30.48+PM+%282%29.jpeg?Expires=1602973251&Signature=nwOsqp9wmZdYGH1vad5Pk~YGrzldPUrnRa~GrG2I8SQfg2zClzru4-CWyur8fHKhrFvEI23SR2D-rIslek7vbr5~vSkDI96oA5je~FHqJfuXxlMQguCU77mguCdENrK6bMthQ8N2nsqdeg1Xzp6wMq2YPx~tn-TKowP7ToedaS8K1s1Mmuy7KdkPKmPUHWUze8q9mBWBsRYnZ2v38C8MSqTFafNLzIauRRSxzwDaBGL51l-~AO7mtb6V1pEY9MyxN3UOpe6LOf7QMMh4FTbsoSRwrheWBLDwGX6YmCorlPIAuTP8NII~lMrJZbNWtSO3~MgF5z-wXXRewnydFnlOSA__&Key-Pair-Id=APKAJU3VE62QBWZP27QQ',
-                priority: FastImage.priority.normal,
+                priority: FastImage.priority.normal
               }}
               // resizeMode={FastImage.resizeMode.contain}
             />
@@ -155,11 +154,11 @@ export const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({
               onPress={() => {}}
             />
             <FastImage
-              style={{width: 25, height: 50}}
+              style={{ width: 25, height: 50 }}
               source={{
                 uri:
                   'https://cdn3.alegra.com/69f2f33437015bd18c9e459aae41f6a319953c9b-1598478470-WhatsApp+Image+2020-08-26+at+4.30.48+PM+%282%29.jpeg?Expires=1602973251&Signature=nwOsqp9wmZdYGH1vad5Pk~YGrzldPUrnRa~GrG2I8SQfg2zClzru4-CWyur8fHKhrFvEI23SR2D-rIslek7vbr5~vSkDI96oA5je~FHqJfuXxlMQguCU77mguCdENrK6bMthQ8N2nsqdeg1Xzp6wMq2YPx~tn-TKowP7ToedaS8K1s1Mmuy7KdkPKmPUHWUze8q9mBWBsRYnZ2v38C8MSqTFafNLzIauRRSxzwDaBGL51l-~AO7mtb6V1pEY9MyxN3UOpe6LOf7QMMh4FTbsoSRwrheWBLDwGX6YmCorlPIAuTP8NII~lMrJZbNWtSO3~MgF5z-wXXRewnydFnlOSA__&Key-Pair-Id=APKAJU3VE62QBWZP27QQ',
-                priority: FastImage.priority.normal,
+                priority: FastImage.priority.normal
               }}
               // resizeMode={FastImage.resizeMode.contain}
             />
@@ -174,11 +173,11 @@ export const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({
               onPress={() => {}}
             />
             <FastImage
-              style={{width: 25, height: 50}}
+              style={{ width: 25, height: 50 }}
               source={{
                 uri:
                   'https://cdn3.alegra.com/69f2f33437015bd18c9e459aae41f6a319953c9b-1598478470-WhatsApp+Image+2020-08-26+at+4.30.48+PM+%282%29.jpeg?Expires=1602973251&Signature=nwOsqp9wmZdYGH1vad5Pk~YGrzldPUrnRa~GrG2I8SQfg2zClzru4-CWyur8fHKhrFvEI23SR2D-rIslek7vbr5~vSkDI96oA5je~FHqJfuXxlMQguCU77mguCdENrK6bMthQ8N2nsqdeg1Xzp6wMq2YPx~tn-TKowP7ToedaS8K1s1Mmuy7KdkPKmPUHWUze8q9mBWBsRYnZ2v38C8MSqTFafNLzIauRRSxzwDaBGL51l-~AO7mtb6V1pEY9MyxN3UOpe6LOf7QMMh4FTbsoSRwrheWBLDwGX6YmCorlPIAuTP8NII~lMrJZbNWtSO3~MgF5z-wXXRewnydFnlOSA__&Key-Pair-Id=APKAJU3VE62QBWZP27QQ',
-                priority: FastImage.priority.normal,
+                priority: FastImage.priority.normal
               }}
               // resizeMode={FastImage.resizeMode.contain}
             />
@@ -198,3 +197,4 @@ export const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({
     </View>
   );
 };
+export default Cocktail;

@@ -1,16 +1,17 @@
-import {createStackNavigator} from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import ScrollableTabView, {
-  ScrollableTabBar,
+  ScrollableTabBar
 } from 'react-native-scrollable-tab-view';
-import {BartenderParamList} from '../navigation/types/BartenderParamList';
-import {Categories} from './categories/Categories';
-import {Cocktail} from './cocktail/Cocktail';
+import { BartenderParamList } from '../navigation/types/BartenderParamList';
+import Categories from './categories/Categories';
+import Cocktail from './cocktail/Cocktail';
 
 interface BartenderProps {}
 
-function CategoryTabs({pressCategoryHandler}: any) {
-  //TODO get categories from algolia
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function CategoryTabs({ pressCategoryHandler }: any) {
+  // TODO get categories from algolia
   const categories = [
     'rum',
     'tequila',
@@ -19,32 +20,33 @@ function CategoryTabs({pressCategoryHandler}: any) {
     'gin',
     'whiskey',
     'vodka',
-    'liqueur',
+    'liqueur'
   ];
   const categoriesToShow = categories.map((cat) => {
     return (
       <Categories
         category={cat}
-        //@ts-ignore
+        // @ts-ignore
         tabLabel={cat[0].toUpperCase() + cat.slice(1)}
         key={cat}
       />
-      //</View>
+      // </View>
     );
   });
   return (
     <ScrollableTabView
       style={{
-        marginTop: 20,
+        marginTop: 20
       }}
       initialPage={0}
       tabBarInactiveTextColor="green"
       tabBarUnderlineStyle={{}}
       renderTabBar={() => (
         <ScrollableTabBar
-          style={{borderWidth: 0, marginLeft: 20, marginRight: 20}}
+          style={{ borderWidth: 0, marginLeft: 20, marginRight: 20 }}
         />
-      )}>
+      )}
+    >
       {categoriesToShow}
     </ScrollableTabView>
   );
@@ -52,7 +54,12 @@ function CategoryTabs({pressCategoryHandler}: any) {
 
 const BartenderStack = createStackNavigator<BartenderParamList>();
 
-export const Bartender: React.FC<BartenderProps> = ({}) => {
+const Category = (props: any) => {
+  console.log('PROPS', props);
+  return <CategoryTabs />;
+};
+
+const Bartender: React.FC<BartenderProps> = () => {
   return (
     <BartenderStack.Navigator initialRouteName="Home">
       <BartenderStack.Screen name="Home" component={Category} />
@@ -61,7 +68,4 @@ export const Bartender: React.FC<BartenderProps> = ({}) => {
   );
 };
 
-const Category = (props: any) => {
-  console.log('PROPS', props);
-  return <CategoryTabs />;
-};
+export default Bartender;

@@ -1,41 +1,36 @@
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import {createStackNavigator} from '@react-navigation/stack';
-import React, {ReactChild, ReactChildren, useEffect} from 'react';
-import {Button, View} from 'react-native';
-
-import {Account} from '../../screens/Account';
-import {Help} from '../../screens/Help';
-import {Home} from '../../screens/Home';
-import {HomeScreen} from '../../screens/Home/HomeScreen';
-import {BottomNav} from '../bottom/BottomNav';
-import {HomeParamList} from '../types/HomeparamList';
-import {PermissionsAndroid, PermissionStatus, Platform} from 'react-native';
 import Geolocation, {
   GeolocationError,
-  GeolocationResponse,
+  GeolocationResponse
 } from '@react-native-community/geolocation';
-import {getLocationPermission} from '../../services/api/permissions/location';
-import {firestore} from 'firebase';
-import {useDispatch, useSelector} from 'react-redux';
-import {addAnonymousUser} from '../../services/api/firebase/users';
-import {setUserData, setUserLocation} from '../../actions/authActions';
-import {formatLocation} from '../../utils/helperMethods';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createStackNavigator } from '@react-navigation/stack';
+import React, { useEffect } from 'react';
+import { PermissionsAndroid, Platform } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUserLocation } from '../../actions/authActions';
+import Account from '../../screens/Account';
+import Help from '../../screens/Help';
+import addAnonymousUser from '../../services/api/firebase/users';
+import { getLocationPermission } from '../../services/api/permissions/location';
+import { formatLocation } from '../../utils/helperMethods';
+import BottomNav from '../bottom/BottomNav';
+import { HomeParamList } from '../types/HomeparamList';
 
 export const Drawer = createDrawerNavigator();
 const HomeStack = createStackNavigator<HomeParamList>();
 
 interface DrawerNavProps {}
 
-const renderHomeStack = () => {
+const RenderHomeStack = () => {
   // @ts-ignore
-  const state = useSelector((state) => state.auth);
+  const state = useSelector((innerState) => innerState.auth);
   const dispatch = useDispatch();
   const getLocation = async () => {
     try {
       if (Platform.OS === 'android') {
         // Calling the permission function
         getLocationPermission().then((granted) => {
-          //TODO move code back into location.ts and await her
+          // TODO move code back into location.ts and await her
           if (granted === PermissionsAndroid.RESULTS.GRANTED) {
             console.log('granted location permission');
             Geolocation.getCurrentPosition(
@@ -48,7 +43,7 @@ const renderHomeStack = () => {
               },
               (error: GeolocationError) =>
                 console.log('Error', JSON.stringify(error)),
-              {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
+              { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
             );
           } else {
             console.log('denied location permission');
@@ -57,7 +52,7 @@ const renderHomeStack = () => {
       } else {
         // TODO IOS code
         // getOneTimeLocation();
-        //subscribeLocationLocation();
+        // subscribeLocationLocation();
       }
     } catch (err) {
       console.log(err);
@@ -65,6 +60,7 @@ const renderHomeStack = () => {
   };
   useEffect(() => {
     getLocation();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <HomeStack.Navigator initialRouteName="Home">
@@ -73,10 +69,10 @@ const renderHomeStack = () => {
   );
 };
 
-export const DrawerNav: React.FC<DrawerNavProps> = ({}) => {
+export const DrawerNav: React.FC<DrawerNavProps> = () => {
   return (
     <Drawer.Navigator initialRouteName="Home">
-      <Drawer.Screen name="Home" component={renderHomeStack} />
+      <Drawer.Screen name="Home" component={RenderHomeStack} />
       <Drawer.Screen name="Account" component={Account} />
       <Drawer.Screen name="Help" component={Help} />
     </Drawer.Navigator>

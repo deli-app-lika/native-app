@@ -1,10 +1,9 @@
 import firestore from '@react-native-firebase/firestore';
-import {ICocktail} from './../../../models/cocktail';
-import {IItem} from './../../../models/item';
+import { ICocktail } from '../../../models/cocktail';
 
-export const getIngredients = async (cocktail: ICocktail) => {
-  const ingredients = cocktail.ingredients;
-  const items: IItem[] = [];
+const getIngredients = async (cocktail: ICocktail) => {
+  const { ingredients } = cocktail;
+
   ingredients.forEach(async (ingredient) => {
     const item = await firestore()
       .collection('inventory')
@@ -21,3 +20,5 @@ export const getIngredients = async (cocktail: ICocktail) => {
     });
   });
 };
+
+export default getIngredients;

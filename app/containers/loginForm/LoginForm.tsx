@@ -1,12 +1,13 @@
-import React from 'react'
-import {View, Text} from 'react-native'
+import React from 'react';
+import { Text, View } from 'react-native';
 
-interface LoginFormProps {
+interface LoginFormProps {}
 
-}
-
-export const LoginForm: React.FC<LoginFormProps> = ({}) => {
-        return (
-    <View><Text></Text></View>
-);
-}
+const LoginForm: React.FC<LoginFormProps> = () => {
+  return (
+    <View>
+      <Text />
+    </View>
+  );
+};
+export default LoginForm;

@@ -1,6 +1,6 @@
-import {RouteProp} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {ICocktail} from './../../models/cocktail';
+import { RouteProp } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { ICocktail } from '../../models/cocktail';
 
 export type BartenderParamList = {
   Home: undefined;
