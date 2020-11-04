@@ -1,12 +1,13 @@
-import React from 'react'
-import {View, Text} from 'react-native'
+import React from 'react';
+import { Text, View } from 'react-native';
 
-interface FavoritesProps {
+interface FavoritesProps {}
 
-}
-
-export const Favorites: React.FC<FavoritesProps> = ({}) => {
-        return (
-    <View><Text>Favorites Screen</Text></View>
-);
-}
+const Favorites: React.FC<FavoritesProps> = () => {
+  return (
+    <View>
+      <Text>Favorites Screen</Text>
+    </View>
+  );
+};
+export default Favorites;

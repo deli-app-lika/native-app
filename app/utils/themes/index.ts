@@ -10,29 +10,29 @@ const primary = {
     error: '#B71F0E',
     disabled: '#BEC6C6',
     placeholder: '#1481BA',
-    backdrop: '#001021',
+    backdrop: '#001021'
   },
 
   fonts: {
     light: {
       fontFamily: 'sans-serif-light',
-      fontWeight: 'normal',
+      fontWeight: 'normal'
     },
     medium: {
       fontFamily: 'sans-serif-medium',
-      fontWeight: 'normal',
+      fontWeight: 'normal'
     },
     regular: {
       fontFamily: 'sans-serif',
-      fontWeight: 'normal',
+      fontWeight: 'normal'
     },
     thin: {
       fontFamily: 'sans-serif-thin',
-      fontWeight: 'normal',
-    },
+      fontWeight: 'normal'
+    }
   },
-  animation: {scale: 1.0},
+  animation: { scale: 1.0 }
 };
 export default {
-  primary,
+  primary
 };

@@ -1,6 +1,31 @@
 module.exports = {
-  root: true,
-  extends: '@react-native-community',
+  env: {
+    es6: true,
+    node: true
+  },
+  extends: [
+    '@react-native-community',
+    'airbnb-typescript',
+    'prettier',
+    'prettier/@typescript-eslint',
+    'prettier/react'
+  ],
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly'
+  },
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true
+    },
+    ecmaVersion: 2018,
+    sourceType: 'module',
+    tsconfigRootDir: __dirname,
+    project: ['./tsconfig.json']
+  },
+  plugins: ['react', '@typescript-eslint'],
+  rules: {
+    'react/prop-types': 0
+  }
 };

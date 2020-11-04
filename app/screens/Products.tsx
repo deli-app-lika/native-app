@@ -1,12 +1,14 @@
-import React from 'react'
-import {View, Text} from 'react-native'
+import React from 'react';
+import { Text, View } from 'react-native';
 
-interface ProductsProps {
+interface ProductsProps {}
 
-}
+const Products: React.FC<ProductsProps> = () => {
+  return (
+    <View>
+      <Text>Products Screen</Text>
+    </View>
+  );
+};
 
-export const Products: React.FC<ProductsProps> = ({}) => {
-        return (
-    <View><Text>Products Screen</Text></View>
-);
-}
+export default Products;
