@@ -1,23 +1,23 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {Bartender} from '../../screens/Bartender';
-import {Favorites} from '../../screens/Favorites';
-import {Products} from '../../screens/Products';
-import {Search} from '../../screens/Search';
-import {BottomParmList} from './BottomParmList';
+import Bartender from '../../screens/Bartender';
+import Favorites from '../../screens/Favorites';
+import Products from '../../screens/Products';
+import Search from '../../screens/Search';
+import { BottomParmList } from './BottomParmList';
 
 interface BottomNavProps {}
 
-interface BartenderStackViewProps {}
+// interface BartenderStackViewProps {}
 
 const Tabs = createBottomTabNavigator<BottomParmList>();
 
-export const BottomNav: React.FC<BottomNavProps> = ({}) => {
+const BottomNav: React.FC<BottomNavProps> = () => {
   return (
     <Tabs.Navigator
-      screenOptions={({route}) => ({
-        tabBarIcon: ({focused, color, size}) => {
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
           if (route.name === 'Bartender') {
@@ -33,14 +33,15 @@ export const BottomNav: React.FC<BottomNavProps> = ({}) => {
           }
 
           // You can return any component that you like here!
-          //@ts-ignore
+          // @ts-ignore
           return <Ionicons name={iconName} size={size} color={color} />;
-        },
+        }
       })}
       tabBarOptions={{
         activeTintColor: 'tomato',
-        inactiveTintColor: 'gray',
-      }}>
+        inactiveTintColor: 'gray'
+      }}
+    >
       <Tabs.Screen name="Bartender" component={Bartender} />
       <Tabs.Screen name="Search" component={Search} />
       <Tabs.Screen name="Products" component={Products} />
@@ -48,3 +49,4 @@ export const BottomNav: React.FC<BottomNavProps> = ({}) => {
     </Tabs.Navigator>
   );
 };
+export default BottomNav;

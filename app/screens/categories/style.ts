@@ -1,33 +1,33 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   ScrollViewContianer: {
-    flex: 1,
+    flex: 1
     // marginTop: 30,
   },
   ScrollView: {
     // backgroundColor: 'pink',
-    marginHorizontal: 20,
+    marginHorizontal: 20
   },
   Thumbnail: {
     marginTop: 20,
     flex: 1,
     alignItems: 'center',
     flexDirection: 'row',
-    width: '100%',
+    width: '100%'
   },
   Image: {
     width: 200,
-    height: 100,
+    height: 100
   },
   CocktailName: {
     textAlign: 'center',
     fontSize: 20,
-    color: '#cc0e80',
-  },
+    color: '#cc0e80'
+  }
 });
 export default styles;

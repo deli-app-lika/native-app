@@ -1,12 +1,13 @@
-import React from 'react'
-import {View, Text} from 'react-native'
+import React from 'react';
+import { Text, View } from 'react-native';
 
-interface ButtonProps {
+interface ButtonProps {}
 
-}
-
-export const Button: React.FC<ButtonProps> = ({}) => {
-        return (
-    <View><Text></Text></View>
-);
-}
+const Button: React.FC<ButtonProps> = () => {
+  return (
+    <View>
+      <Text />
+    </View>
+  );
+};
+export default Button;
