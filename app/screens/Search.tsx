@@ -1,12 +1,13 @@
-import React from 'react'
-import {View, Text} from 'react-native'
+import React from 'react';
+import { Text, View } from 'react-native';
 
-interface SearchProps {
+interface SearchProps {}
 
-}
-
-export const Search: React.FC<SearchProps> = ({}) => {
-        return (
-    <View><Text>Search Screen</Text></View>
-);
-}
+const Search: React.FC<SearchProps> = () => {
+  return (
+    <View>
+      <Text>Search Screen</Text>
+    </View>
+  );
+};
+export default Search;

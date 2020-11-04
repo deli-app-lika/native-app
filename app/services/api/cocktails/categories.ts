@@ -1,19 +1,19 @@
 import algoliasearch from 'algoliasearch';
-import {ICocktail} from './../../../models/cocktail';
+import { ICocktail } from '../../../models/cocktail';
 
 export enum CategoriesList {
   'bourbon',
   'gin',
   'tequila',
   'rum',
-  'whiskey',
+  'whiskey'
 }
 
 const client = algoliasearch('V3QJV77HHH', '50dfcd80755532141b13759738052ff1');
 const index = client.initIndex('Cocktails');
 
 export const getCategoryCocktails = async (
-  category: string,
+  category: string
 ): Promise<ICocktail[]> => {
   try {
     const fetchedCocktails = await index.search(category);
@@ -25,7 +25,7 @@ export const getCategoryCocktails = async (
         instructions: cocktail.instructions,
         images: cocktail.images,
         thumbnail: cocktail.thumbnail,
-        category: cocktail.category,
+        category: cocktail.category
       };
       return cleanCocktail as ICocktail;
     });
