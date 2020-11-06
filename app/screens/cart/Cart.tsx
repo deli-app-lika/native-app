@@ -2,6 +2,7 @@ import React from 'react';
 import { ScrollView, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { Colors, IconButton, Text } from 'react-native-paper';
+import NumberToggler from '../../components/numberToggler/NumberToggler';
 import NavigationService from '../../navigation/NavigationService';
 import styles from './styles';
 
@@ -60,6 +61,7 @@ const Cart = ({ route }: any) => {
                 // resizeMode={FastImage.resizeMode.contain}
               />
               <Text style={styles.ingredientText}>LICOR IMPORTADO</Text>
+              <NumberToggler />
               <Text style={styles.ingredientPrice}>$50.00</Text>
             </View>
             <View style={styles.ingredient}>

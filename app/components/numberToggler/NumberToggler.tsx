@@ -53,10 +53,11 @@ const NumberToggler: React.FC<NumberTogglerProps> = () => {
 
   const onPress = (isMinus: boolean) => {
     let newCount = 0;
+    console.log(isMinus);
     if (isMinus) {
       newCount = count - 1 <= minCount ? minCount : count - 1;
     } else {
-      newCount = count + 1 >= maxCount ? maxCount : count - 1;
+      newCount = count + 1 >= maxCount ? maxCount : count + 1;
     }
     setCount(newCount);
   };
