@@ -63,7 +63,12 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
       <View style={styles.titleCart}>
         <Text style={styles.textDisplay}>{params.name}</Text>
         <View style={styles.cartButton}>
-          <TouchableOpacity onPress={() => console.log('pressed')}>
+          <TouchableOpacity
+            onPress={() => {
+              console.log('pressed');
+              NavigationService.navigate('Cart', params);
+            }}
+          >
             <Text style={styles.buttonText}>Add to Cart</Text>
           </TouchableOpacity>
         </View>
