@@ -4,34 +4,23 @@ import { Colors } from 'react-native-paper';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    // justifyContent: 'center',
     alignItems: 'center'
+    // margin: 20
   },
   topHeader: {
     width: '100%',
     height: '4%',
-    flex: 1,
+    marginBottom: 5,
+    position: 'relative',
+    // flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
-  cocktailImage: {
-    height: '33%',
-    marginTop: 25
-  },
-  titleCart: {
-    width: '100%',
-    height: '5%',
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-    // marginTop: 20,
-  },
-  ingredientsList: {
-    height: '47%',
-    borderWidth: 1,
-    width: '92%',
-    marginTop: 5,
-    borderColor: Colors.grey400
+
+  itemList: {
+    // height: '47%',
+    // borderWidth: 1,
   },
   directionText: {
     width: '100%',
@@ -59,7 +48,7 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   ingredient: {
-    flex: 1,
+    flex: 3,
     height: 50,
     width: '100%',
     flexDirection: 'row',
