@@ -6,21 +6,23 @@ const styles = StyleSheet.create({
     flex: 1,
     // justifyContent: 'center',
     alignItems: 'center'
-    // margin: 20
   },
   topHeader: {
     width: '100%',
     height: '4%',
-    marginBottom: 5,
+    marginBottom: 25,
     position: 'relative',
     // flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    alignSelf: 'flex-start'
   },
-
+  itemsListView: {
+    width: '100%'
+  },
   itemList: {
-    // height: '47%',
-    // borderWidth: 1,
+    marginLeft: 15,
+    marginRight: 15
   },
   directionText: {
     width: '100%',
@@ -47,24 +49,62 @@ const styles = StyleSheet.create({
     color: Colors.pink300,
     textAlign: 'center'
   },
-  ingredient: {
+  item: {
     flex: 3,
     height: 50,
     width: '100%',
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    // justifyContent: 'space-evenly',
     marginTop: 5
+    // backgroundColor: 'yellow'
   },
-  ingredientText: {
-    textAlign: 'center',
-    alignSelf: 'center',
-    marginLeft: 20
+  itemText: {
+    // textAlign: 'left',
+    flexShrink: 1,
+    alignSelf: 'center'
+    // marginRight: 5
   },
-  ingredientPrice: {
-    color: Colors.pink300,
-    textAlign: 'center',
-    marginRight: 20,
-    alignSelf: 'center',
+  itemPrice: {
+    color: Colors.orange800,
+    alignSelf: 'flex-end',
+    fontWeight: 'bold',
+    flexShrink: 1,
+    fontSize: 15
+  },
+  itemNameImage: {
+    flex: 3,
+    flexDirection: 'row'
+    // backgroundColor: 'red'
+  },
+  itemImage: {
+    width: 25,
+    height: 50,
+    marginRight: 10
+  },
+  numberToggler: {
+    justifyContent: 'center',
+    flex: 2
+    // backgroundColor: 'orange'
+  },
+  itemPriceView: {
+    justifyContent: 'center',
+    flexDirection: 'column',
+    flex: 1
+    // backgroundColor: 'green'
+  },
+  cartTitle: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  cartMainTitle: {
+    color: Colors.orange800,
+    fontSize: 25,
+    fontWeight: 'bold'
+  },
+  cartSubTitle: {
+    marginLeft: 10,
+    fontSize: 15,
+    color: Colors.orange800,
     fontWeight: 'bold'
   }
 });
