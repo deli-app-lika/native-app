@@ -148,6 +148,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'right',
     alignSelf: 'flex-end'
+  },
+  accountView: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  accountSignin: {
+    color: Colors.orange800,
+    fontSize: 20,
+    fontWeight: 'bold'
   }
 });
 export default styles;
