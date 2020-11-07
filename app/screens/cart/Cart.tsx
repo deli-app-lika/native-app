@@ -1,7 +1,7 @@
 import React from 'react';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import { Colors, IconButton, Text } from 'react-native-paper';
+import { Button, Colors, IconButton, Text } from 'react-native-paper';
 import NumberToggler from '../../components/numberToggler/NumberToggler';
 import NavigationService from '../../navigation/NavigationService';
 import styles from './styles';
@@ -116,6 +116,25 @@ const Cart = ({ route }: any) => {
               <Text style={styles.summaryPriceTotalValue}>$8.02</Text>
             </View>
           </View>
+        </View>
+      </View>
+      <View
+        style={[styles.sectionContainer, { flex: 1, justifyContent: 'center' }]}
+      >
+        <View style={styles.accountView}>
+          <Button
+            mode="contained"
+            color={Colors.orange800}
+            onPress={() => {
+              console.log('press create account');
+            }}
+          >
+            <Text style={{ color: 'white' }}>Create Account</Text>
+          </Button>
+          <Text style={{ marginTop: 10 }}>Already have an account?</Text>
+          <TouchableOpacity onPress={() => console.log('press sign in')}>
+            <Text style={styles.accountSignin}>Sign In</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
