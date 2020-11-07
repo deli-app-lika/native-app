@@ -17,8 +17,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignSelf: 'flex-start'
   },
-  itemsListView: {
-    width: '100%'
+  sectionContainer: {
+    width: '100%',
+    marginBottom: 30
   },
   itemList: {
     marginLeft: 15,
@@ -106,6 +107,47 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: Colors.orange800,
     fontWeight: 'bold'
+  },
+  summaryItems: {
+    marginLeft: 15,
+    marginRight: 15,
+    marginTop: 5
+  },
+  summaryPriceView: {
+    marginLeft: 20,
+    marginTop: 10,
+    marginBottom: 10
+  },
+  summaryPriceLine: {
+    flexDirection: 'row'
+  },
+  summaryPriceItemTitle: {
+    color: Colors.orange800,
+    fontSize: 15,
+    fontWeight: 'bold',
+    flex: 1
+  },
+  summaryPriceItemValue: {
+    flex: 1,
+    color: Colors.orange800,
+    fontSize: 15,
+    fontWeight: 'bold',
+    textAlign: 'right',
+    alignSelf: 'flex-end'
+  },
+  summaryPriceTotal: {
+    color: Colors.orange800,
+    fontSize: 20,
+    fontWeight: 'bold',
+    flex: 1
+  },
+  summaryPriceTotalValue: {
+    flex: 1,
+    color: Colors.orange800,
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'right',
+    alignSelf: 'flex-end'
   }
 });
 export default styles;

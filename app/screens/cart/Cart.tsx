@@ -26,7 +26,7 @@ const Cart = ({ route }: any) => {
           }}
         />
       </View>
-      <View style={styles.itemsListView}>
+      <View style={styles.sectionContainer}>
         <View style={styles.itemList}>
           <View style={styles.cartTitle}>
             <Text style={styles.cartMainTitle}>Your Shopping Cart</Text>
@@ -93,6 +93,29 @@ const Cart = ({ route }: any) => {
               </View>
             </View>
           </ScrollView>
+        </View>
+      </View>
+      <View
+        style={[styles.sectionContainer, { backgroundColor: Colors.grey100 }]}
+      >
+        <View style={styles.summaryItems}>
+          <View style={styles.cartTitle}>
+            <Text style={styles.cartMainTitle}>Order Summary</Text>
+          </View>
+          <View style={styles.summaryPriceView}>
+            <View style={styles.summaryPriceLine}>
+              <Text style={styles.summaryPriceItemTitle}>Subtotal:</Text>
+              <Text style={styles.summaryPriceItemValue}>$87.96</Text>
+            </View>
+            <View style={styles.summaryPriceLine}>
+              <Text style={styles.summaryPriceItemTitle}>Estimated Tax:</Text>
+              <Text style={styles.summaryPriceItemValue}>$8.02</Text>
+            </View>
+            <View style={styles.summaryPriceLine}>
+              <Text style={styles.summaryPriceTotal}>Estimated Tax:</Text>
+              <Text style={styles.summaryPriceTotalValue}>$8.02</Text>
+            </View>
+          </View>
         </View>
       </View>
     </View>
