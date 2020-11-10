@@ -5,6 +5,7 @@ import { ICocktail } from '../../models/cocktail';
 export type BartenderParamList = {
   Home: undefined;
   Cocktail: ICocktail;
+  Cart: undefined;
 };
 
 export type BartenderStackNavProps<T extends keyof BartenderParamList> = {
