@@ -25,6 +25,7 @@ const RenderHomeStack = () => {
   // @ts-ignore
   const state = useSelector((innerState) => innerState.auth);
   const dispatch = useDispatch();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const getLocation = async () => {
     try {
       if (Platform.OS === 'android') {
