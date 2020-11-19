@@ -19,6 +19,7 @@ const Favorites: React.FC<FavoritesProps> = () => {
       </View>
 
       <ScrollView>
+        {/* TODO move inline styles into syles.ts file */}
         <View
           style={{
             height: 100,
