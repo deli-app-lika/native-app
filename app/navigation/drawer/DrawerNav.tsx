@@ -35,7 +35,6 @@ const RenderHomeStack = () => {
   const state = useSelector((innerState) => innerState.auth);
   const dispatch = useDispatch();
   const navigationState = useNavigationState((navState) => navState);
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const getLocation = async () => {
     try {
