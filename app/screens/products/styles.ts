@@ -16,8 +16,8 @@ const styles = StyleSheet.create({
   },
   titleText: { color: Colors.orange800, fontSize: 25, fontWeight: 'bold' },
   itemView: {
-    height: '40%',
-    width: '30%',
+    height: 220,
+    width: 120,
     backgroundColor: 'lightgrey',
     margin: 10,
     flexDirection: 'column'
