@@ -4,6 +4,7 @@ import ScrollableTabView, {
   ScrollableTabBar
 } from 'react-native-scrollable-tab-view';
 import Products from './Products';
+import styles from './tabStyles';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function CategoryTabs({ pressCategoryHandler }: any) {
@@ -30,18 +31,12 @@ function CategoryTabs({ pressCategoryHandler }: any) {
   });
   return (
     <ScrollableTabView
-      style={{
-        marginTop: 20
-      }}
+      style={styles.scrollableTabView}
       initialPage={0}
       tabBarInactiveTextColor={Colors.orange800}
       tabBarActiveTextColor={Colors.red700}
-      tabBarUnderlineStyle={{ backgroundColor: Colors.red700 }}
-      renderTabBar={() => (
-        <ScrollableTabBar
-          style={{ borderWidth: 0, marginLeft: 20, marginRight: 20 }}
-        />
-      )}
+      tabBarUnderlineStyle={styles.tabBarUnderlineStyle}
+      renderTabBar={() => <ScrollableTabBar style={styles.scrollableTabBar} />}
     >
       {categoriesToShow}
     </ScrollableTabView>
