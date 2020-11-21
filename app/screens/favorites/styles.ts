@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   itemImageView: {
-    flex: 2,
     justifyContent: 'center'
   },
   itemImage: {
