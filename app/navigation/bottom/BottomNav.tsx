@@ -3,7 +3,7 @@ import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Bartender from '../../screens/Bartender';
 import Favorites from '../../screens/favorites/Favorites';
-import Products from '../../screens/products/Products';
+import Products from '../../screens/products/ProductTabs';
 import Search from '../../screens/Search/Search';
 import { BottomParmList } from './BottomParmList';
 
