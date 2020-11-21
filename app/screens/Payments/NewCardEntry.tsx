@@ -117,7 +117,7 @@ const NewCardEntry: React.FC<NewCardEntryProps> = () => {
                 ...cardEntryStyles.submitButtonText
               }}
             >
-              Checkout!
+              Add Card
             </Text>
           </View>
         </TouchableOpacity>
