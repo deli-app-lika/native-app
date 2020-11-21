@@ -1,29 +1,33 @@
+import React, { useEffect } from 'react';
+
+import { PermissionsAndroid, Platform, View } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+
 import Geolocation, {
   GeolocationError,
   GeolocationResponse
 } from '@react-native-community/geolocation';
-import { PermissionsAndroid, Platform } from 'react-native';
-import React, { useEffect } from 'react';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { useNavigationState } from '@react-navigation/native';
 import {
-  StackHeaderProps,
-  createStackNavigator
+  createStackNavigator,
+  StackHeaderProps
 } from '@react-navigation/stack';
-import { useDispatch, useSelector } from 'react-redux';
 
+import { Colors, IconButton, Text } from 'react-native-paper';
+import { setUserLocation } from '../../actions/authActions';
 import Account from '../../screens/Account';
-import BottomNav from '../bottom/BottomNav';
 import Help from '../../screens/Help';
+import addAnonymousUser from '../../services/api/firebase/users';
+import { getLocationPermission } from '../../services/api/permissions/location';
+import { formatLocation } from '../../utils/helperMethods';
+import BottomNav from '../bottom/BottomNav';
+import LikaHeader from '../header/Header';
 import { HomeParamList } from '../types/HomeparamList';
 import LikaDrawer from './LikaDrawer';
-import LikaHeader from '../header/Header';
-import addAnonymousUser from '../../services/api/firebase/users';
-// eslint-disable-next-line
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { formatLocation } from '../../utils/helperMethods';
-import { getLocationPermission } from '../../services/api/permissions/location';
-import { setUserLocation } from '../../actions/authActions';
-// eslint-disable-next-line
-import { useNavigationState } from '@react-navigation/native';
+import Payments from '../../screens/Payments/Payments';
+import styles from './style';
+import NewCardEntry from '../../screens/Payments/NewCardEntry';
 
 export const Drawer = createDrawerNavigator();
 const HomeStack = createStackNavigator<HomeParamList>();
@@ -54,7 +58,11 @@ const RenderHomeStack = () => {
               },
               (error: GeolocationError) =>
                 console.log('Error', JSON.stringify(error)),
-              { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+              {
+                enableHighAccuracy: true,
+                timeout: 20000,
+                maximumAge: 1000
+              }
             );
           } else {
             console.log('denied location permission');
@@ -92,6 +100,58 @@ const RenderHomeStack = () => {
       initialRouteName="Home"
     >
       <HomeStack.Screen name="Home" component={BottomNav} />
+      <HomeStack.Screen
+        name="Payments"
+        component={Payments}
+        options={({ navigation }) => ({
+          header: () => {
+            return (
+              <View style={styles.Header}>
+                <View style={styles.BackArrow}>
+                  <IconButton
+                    icon="keyboard-backspace"
+                    color={Colors.black}
+                    size={40}
+                    onPress={() => {
+                      // @ts-ignore
+                      navigation.goBack();
+                    }}
+                  />
+                </View>
+                <View style={styles.HeaderBody}>
+                  <Text style={styles.HeaderTitle}>LIKA</Text>
+                </View>
+              </View>
+            );
+          }
+        })}
+      />
+      <HomeStack.Screen
+        name="InputPayment"
+        component={NewCardEntry}
+        options={({ navigation }) => ({
+          header: () => {
+            return (
+              <View style={styles.Header}>
+                <View style={styles.BackArrow}>
+                  <IconButton
+                    icon="keyboard-backspace"
+                    color={Colors.black}
+                    size={40}
+                    onPress={() => {
+                      // @ts-ignore
+                      navigation.goBack();
+                    }}
+                  />
+                </View>
+                <View style={styles.HeaderBody}>
+                  <Text style={styles.HeaderTitle}>Input Card</Text>
+                </View>
+              </View>
+            );
+          }
+        })}
+      />
     </HomeStack.Navigator>
   );
 };
@@ -99,7 +159,7 @@ const RenderHomeStack = () => {
 export const DrawerNav: React.FC<DrawerNavProps> = () => {
   return (
     <Drawer.Navigator
-      drawerStyle={{ width: '100%', height: '100%' }}
+      drawerStyle={styles.DrawerStyles}
       initialRouteName="Home"
       // @ts-ignore
       // eslint-disable-next-line react/jsx-props-no-spreading

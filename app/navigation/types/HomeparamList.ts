@@ -4,6 +4,8 @@ import { StackNavigationProp } from '@react-navigation/stack';
 export type HomeParamList = {
   Welcome: undefined;
   Home: undefined;
+  Payments: undefined;
+  InputPayment: undefined;
 };
 
 export type HomeNavProps<T extends keyof HomeParamList> = {
