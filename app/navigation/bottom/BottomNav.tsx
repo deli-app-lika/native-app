@@ -3,8 +3,8 @@ import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Bartender from '../../screens/Bartender';
 import Favorites from '../../screens/favorites/Favorites';
-import Products from '../../screens/products/ProductTabs';
 import Search from '../../screens/Search/Search';
+import ProductsNav from '../products/ProductsStack';
 import { BottomParmList } from './BottomParmList';
 
 interface BottomNavProps {}
@@ -44,7 +44,7 @@ const BottomNav: React.FC<BottomNavProps> = () => {
     >
       <Tabs.Screen name="Bartender" component={Bartender} />
       <Tabs.Screen name="Search" component={Search} />
-      <Tabs.Screen name="Products" component={Products} />
+      <Tabs.Screen name="Products" component={ProductsNav} />
       <Tabs.Screen name="Favorites" component={Favorites} />
     </Tabs.Navigator>
   );
