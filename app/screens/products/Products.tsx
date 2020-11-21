@@ -8,37 +8,14 @@ interface ProductsProps {}
 const Products: React.FC<ProductsProps> = () => {
   return (
     <View style={styles.conainer}>
-      <View
-        style={{
-          // backgroundColor: 'yellow',
-          height: '100%'
-        }}
-      >
+      <View style={styles.sectionView}>
         <View style={styles.titleView}>
           <Text style={styles.titleText}>Best Sellers</Text>
         </View>
-        <View
-          style={{
-            height: '40%',
-            width: '30%',
-            backgroundColor: 'lightgrey',
-            margin: 10,
-            flexDirection: 'column'
-          }}
-        >
-          <View
-            style={{
-              flex: 2,
-              // backgroundColor: 'purple',
-              marginBottom: 10
-            }}
-          >
+        <View style={styles.itemView}>
+          <View style={styles.itemImageView}>
             <FastImage
-              style={{
-                flex: 2,
-                height: undefined,
-                width: undefined
-              }}
+              style={styles.itemImage}
               // resizeMode="contain"
               resizeMode="cover"
               source={{
@@ -48,50 +25,13 @@ const Products: React.FC<ProductsProps> = () => {
               }}
             />
           </View>
-          <View
-            style={{
-              flex: 1
-              // backgroundColor: 'green'
-            }}
-          >
-            <View
-              style={{
-                flex: 2
-                // backgroundColor: 'pink'
-              }}
-            >
-              <Text
-                style={{
-                  color: 'black'
-                }}
-              >
-                Item name Some longer
-              </Text>
+          <View style={styles.itemPropertiesView}>
+            <View style={styles.itemNameView}>
+              <Text style={styles.itemName}>Item name Some longer</Text>
             </View>
-            <View
-              style={{
-                flex: 1,
-                // backgroundColor: 'orange',
-                flexDirection: 'row'
-              }}
-            >
-              <Text
-                style={{
-                  color: 'black',
-                  fontWeight: 'bold',
-                  marginRight: 5
-                }}
-              >
-                $20.00
-              </Text>
-
-              <Text
-                style={{
-                  color: 'black'
-                }}
-              >
-                750 ML
-              </Text>
+            <View style={styles.itemDetailsView}>
+              <Text style={styles.itemPrice}>$20.00</Text>
+              <Text style={styles.itemSize}>750 ML</Text>
             </View>
           </View>
         </View>
