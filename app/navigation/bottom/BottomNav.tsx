@@ -1,11 +1,13 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import React from 'react';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+/* eslint-disable import/order */
+
 import Bartender from '../../screens/Bartender';
-import Favorites from '../../screens/favorites/Favorites';
-import Products from '../../screens/Products';
-import Search from '../../screens/Search';
 import { BottomParmList } from './BottomParmList';
+import Favorites from '../../screens/favorites/Favorites';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Products from '../../screens/Products';
+import React from 'react';
+import Search from '../../screens/Search/Search';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 interface BottomNavProps {}
 
