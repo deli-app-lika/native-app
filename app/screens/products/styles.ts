@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     // backgroundColor: 'yellow',
     // height: '100%'
   },
+  scrollView: { backgroundColor: 'white' },
   titleView: {
     paddingTop: 10,
     paddingBottom: 10,
@@ -32,7 +33,16 @@ const styles = StyleSheet.create({
     height: undefined,
     width: undefined
   },
-
+  favIcon: {
+    position: 'absolute',
+    // left: 0,
+    right: 0,
+    top: 0,
+    margin: 0,
+    padding: 0
+    // bottom: 0
+    // backgroundColor: 'black'
+  },
   itemPropertiesView: {
     flex: 1
     // backgroundColor: 'green'
