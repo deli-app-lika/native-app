@@ -2,6 +2,7 @@ import React from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { Colors, IconButton } from 'react-native-paper';
+import NavigationService from '../../navigation/NavigationService';
 import styles from './styles';
 
 interface ProductsProps {
@@ -24,6 +25,21 @@ const Products: React.FC<ProductsProps> = ({ category }) => {
                 style={styles.itemView}
                 onPress={() => {
                   console.log('go to item screen');
+                  // TODO send actual item - this is temp data
+                  NavigationService.navigate('Item', {
+                    category: 'tequila',
+                    createdAt:
+                      'Sat Nov 21 2020 17:20:34 GMT-0600 (Central Standard Time)',
+                    currency: 'USD',
+                    itemName: 'Patron Silver Tequila',
+                    itemQuantity: 12,
+                    price: 12.79,
+                    size: 750,
+                    uid: '33eb45fb-9871-4eaa-bea3-28dad424833a',
+                    unit: 'ML',
+                    updatedAt:
+                      'Sat Nov 21 2020 17:20:34 GMT-0600 (Central Standard Time)'
+                  });
                 }}
               >
                 <View style={styles.itemImageView}>
