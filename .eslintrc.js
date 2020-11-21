@@ -24,9 +24,10 @@ module.exports = {
     tsconfigRootDir: __dirname,
     project: ['./tsconfig.json']
   },
-  plugins: ['react', '@typescript-eslint'],
+  plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
     'react/prop-types': 0,
+    'react/jsx-props-no-spreading': 0,
     'prettier/prettier': [
       'error',
       {

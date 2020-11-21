@@ -1,25 +1,38 @@
 import { Colors, IconButton } from 'react-native-paper';
 import { Text, TouchableOpacity, View } from 'react-native';
-
+import auth from '@react-native-firebase/auth';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './style';
+import NavigationService from '../NavigationService';
+import { logout } from '../../actions/authActions';
+import { AppState } from '../../store/configureStore';
+import { IAnonymousUser } from '../../models/user';
 
 interface LikaDrawerProps {
   props: any;
 }
 
 const LikaDrawer: React.FC<LikaDrawerProps> = (props) => {
+  const user = useSelector(
+    (state: AppState) => state.default as IAnonymousUser
+  );
+  const dispatch = useDispatch();
+
+  //  sign out
+  const signUserOut = () => {
+    auth()
+      .signOut()
+      .then(() => {
+        dispatch(logout(user.location));
+      });
+  };
+
   return (
     <View>
-      <View style={{ backgroundColor: Colors.orange900, height: '100%' }}>
-        <View
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center'
-          }}
-        >
-          <View style={{ flex: 0.1 }}>
+      <View style={styles.DrawerContainer}>
+        <View style={styles.Header}>
+          <View style={styles.BackArrow}>
             <IconButton
               icon="keyboard-backspace"
               color={Colors.black}
@@ -30,78 +43,50 @@ const LikaDrawer: React.FC<LikaDrawerProps> = (props) => {
               }}
             />
           </View>
-          <View
-            style={{
-              alignSelf: 'center',
-              justifyContent: 'center',
-              flex: 0.9
-            }}
-          >
-            <Text
-              style={{
-                fontWeight: 'bold',
-                fontSize: 40,
-                color: Colors.pink800,
-                textAlign: 'center'
-              }}
-            >
-              LIKA
-            </Text>
+          <View style={styles.HeaderBody}>
+            <Text style={styles.HeaderTitle}>LIKA</Text>
           </View>
         </View>
-        <View
-          style={{
-            marginTop: 10,
-            marginLeft: 50,
-            flex: 0.4
-          }}
-        >
-          <Text style={styles.DrawerHeaderText}>ACCOUNT</Text>
-          <Text style={styles.DrawerItem}>Account Details</Text>
-          <Text style={styles.DrawerItem}>Payment Information</Text>
-          <Text style={styles.DrawerItem}>Addresses</Text>
-          <Text style={styles.DrawerItem}>Notifications</Text>
+        <View style={styles.AccountSection}>
+          <TouchableOpacity onPress={() => {}}>
+            <Text style={styles.DrawerHeaderText}>ACCOUNT</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => {}}>
+            <Text style={styles.DrawerItem}>Account Details</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              NavigationService.navigate('Payments');
+            }}
+          >
+            <Text style={styles.DrawerItem}>Payment Information</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => {}}>
+            <Text style={styles.DrawerItem}>Addresses</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => {}}>
+            <Text style={styles.DrawerItem}>Notifications</Text>
+          </TouchableOpacity>
         </View>
-        <View
-          style={{
-            marginTop: 30,
-            marginLeft: 50,
-            flex: 0.4
-          }}
-        >
+        <View style={styles.MaintenanceSection}>
           <Text style={styles.DrawerHeaderText}>HELP</Text>
           <Text style={styles.DrawerItem}>Contact Us</Text>
           <Text style={styles.DrawerItem}>Terms of Service</Text>
           <Text style={styles.DrawerItem}>Privacy Policy</Text>
+          {!user.isNewUser ? (
+            <TouchableOpacity
+              onPress={() => {
+                signUserOut();
+              }}
+            >
+              <Text style={styles.DrawerItem}>Logout</Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity onPress={() => {}}>
+              <Text style={styles.DrawerItem}>Login</Text>
+            </TouchableOpacity>
+          )}
         </View>
-        <TouchableOpacity onPress={() => console.log('pressed')}>
-          <View
-            style={{
-              marginLeft: 50,
-              //   flex: 0.2,
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: 20,
-              borderWidth: 2,
-              borderColor: Colors.grey600,
-              width: 250,
-              height: 80
-            }}
-          >
-            <View>
-              <Text
-                style={{
-                  textAlign: 'center',
-                  fontSize: 20,
-                  fontWeight: 'bold',
-                  color: 'white'
-                }}
-              >
-                LOG OUT
-              </Text>
-            </View>
-          </View>
-        </TouchableOpacity>
       </View>
     </View>
   );
