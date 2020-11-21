@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { Colors, IconButton } from 'react-native-paper';
 import styles from './styles';
@@ -20,7 +20,12 @@ const Products: React.FC<ProductsProps> = ({ category }) => {
           </View>
           <View>
             <ScrollView horizontal style={{ backgroundColor: 'white' }}>
-              <View style={styles.itemView}>
+              <TouchableOpacity
+                style={styles.itemView}
+                onPress={() => {
+                  console.log('go to item screen');
+                }}
+              >
                 <View style={styles.itemImageView}>
                   <FastImage
                     style={styles.itemImage}
@@ -54,7 +59,7 @@ const Products: React.FC<ProductsProps> = ({ category }) => {
                     <Text style={styles.itemSize}>750 ML</Text>
                   </View>
                 </View>
-              </View>
+              </TouchableOpacity>
 
               {/* Temp1 start */}
 
