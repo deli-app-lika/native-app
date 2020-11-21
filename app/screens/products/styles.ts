@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     height: undefined,
     width: undefined
   },
+
   itemPropertiesView: {
     flex: 1
     // backgroundColor: 'green'
