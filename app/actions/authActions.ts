@@ -16,7 +16,7 @@ export const setUserData = (data: IUser) => ({
 
 export const setUserLocation = (data: {
   long: number | null;
-  lad: number | null;
+  lat: number | null;
 }) => ({
   type: UPDATE_USER_LOCATION,
   data
@@ -24,7 +24,7 @@ export const setUserLocation = (data: {
 
 export const logout = (location: {
   long: number | null;
-  lad: number | null;
+  lat: number | null;
 }) => ({
   type: LOG_OUT,
   data: location

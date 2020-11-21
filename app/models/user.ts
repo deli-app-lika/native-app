@@ -7,7 +7,7 @@ export interface IUser {
   isAnonymous: boolean;
   location: {
     long: number | null;
-    lad: number | null;
+    lat: number | null;
   };
 }
 

@@ -1,9 +1,8 @@
 import auth from '@react-native-firebase/auth';
 import { NavigationContainer, Theme } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
-import { Button } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { logout, setUserData } from '../actions/authActions';
+import { useDispatch } from 'react-redux';
+import { setUserData } from '../actions/authActions';
 import { IUser } from '../models/user';
 import addAnonymousUser from '../services/api/firebase/users';
 import { formatFirbaseUser } from '../utils/helperMethods';
@@ -22,19 +21,7 @@ const RootNavigator: React.FC<RootNavigatorProps> = ({ theme }) => {
   // firebaseAuth only used for geting/handling authFirebaseUser since it may be expensive to update user state on every firebaseAuthState update
   const [firebaseAuthUser, setfirebaseAuthUser] = useState<IUser | null>();
   // @ts-ignore
-  const state = useSelector((innerState) => innerState.auth);
   const dispatch = useDispatch();
-
-  //  sign out
-  const signUserOut = () => {
-    flag = false;
-    auth()
-      .signOut()
-      .then(() => {
-        console.log('User signed out!');
-        dispatch(logout(state.location));
-      });
-  };
 
   // set ananymous auth
   const anonymousSignIn = () => {
@@ -86,7 +73,7 @@ const RootNavigator: React.FC<RootNavigatorProps> = ({ theme }) => {
     <NavigationContainer ref={navigationRef} theme={theme}>
       <DrawerNav />
       {/* button just to test ananymous sigin in after log out */}
-      <Button title="Sigin out" onPress={signUserOut} />
+      {/* <Button title="Sigin out" onPress={signUserOut} /> */}
     </NavigationContainer>
   );
 };
