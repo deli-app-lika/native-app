@@ -1,4 +1,5 @@
 import React from 'react';
+import { Colors } from 'react-native-paper';
 import ScrollableTabView, {
   ScrollableTabBar
 } from 'react-native-scrollable-tab-view';
@@ -25,7 +26,6 @@ function CategoryTabs({ pressCategoryHandler }: any) {
         tabLabel={cat[0].toUpperCase() + cat.slice(1)}
         key={cat}
       />
-      // </View>
     );
   });
   return (
@@ -34,8 +34,9 @@ function CategoryTabs({ pressCategoryHandler }: any) {
         marginTop: 20
       }}
       initialPage={0}
-      tabBarInactiveTextColor="green"
-      tabBarUnderlineStyle={{}}
+      tabBarInactiveTextColor={Colors.orange800}
+      tabBarActiveTextColor={Colors.red700}
+      tabBarUnderlineStyle={{ backgroundColor: Colors.red700 }}
       renderTabBar={() => (
         <ScrollableTabBar
           style={{ borderWidth: 0, marginLeft: 20, marginRight: 20 }}
