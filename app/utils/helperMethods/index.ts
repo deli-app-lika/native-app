@@ -21,7 +21,7 @@ export const formatLocation = (user: IUser, position: GeolocationResponse) => ({
   ...{
     location: {
       long: position.coords.longitude,
-      lad: position.coords.latitude
+      lat: position.coords.latitude
     }
   }
 });
