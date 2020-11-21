@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   },
   titleText: { color: Colors.orange800, fontSize: 25, fontWeight: 'bold' },
   itemView: {
-    height: 220,
+    height: 200,
     width: 120,
     backgroundColor: 'lightgrey',
     margin: 10,
