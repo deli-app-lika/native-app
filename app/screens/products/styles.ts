@@ -2,23 +2,23 @@ import { StyleSheet } from 'react-native';
 import { Colors } from 'react-native-paper';
 
 const styles = StyleSheet.create({
-  conainer: { flex: 1 },
+  conainer: { flex: 1, backgroundColor: Colors.grey300 },
   sectionView: {
     // backgroundColor: 'yellow',
-    height: '100%'
+    // height: '100%'
   },
   titleView: {
     paddingTop: 10,
     paddingBottom: 10,
     paddingLeft: 20,
-    paddingRight: 20,
-    backgroundColor: 'blue'
+    paddingRight: 20
+    // backgroundColor: 'blue'
   },
   titleText: { color: Colors.orange800, fontSize: 25, fontWeight: 'bold' },
   itemView: {
     height: 200,
     width: 120,
-    backgroundColor: 'lightgrey',
+    // backgroundColor: 'lightgrey',
     margin: 10,
     flexDirection: 'column'
   },
