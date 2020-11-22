@@ -15,9 +15,10 @@ const Item: React.FC<ItemProps> = ({ route }) => {
   return (
     <View style={styles.container}>
       <View style={styles.topHeader}>
+        {/* TODO move x and heart icons into same view as image and position them on top of view */}
         <IconButton
           icon="close"
-          style={{ marginTop: 0, paddingTop: 0 }}
+          style={styles.topIcon}
           color={Colors.pink300}
           size={25}
           onPress={() => {
@@ -25,32 +26,17 @@ const Item: React.FC<ItemProps> = ({ route }) => {
           }}
         />
         <IconButton
-          style={{ marginTop: 0, paddingTop: 0 }}
+          style={styles.topIcon}
           icon="heart-outline"
+          // icon="heart"
           color={Colors.pink300}
           size={25}
-          onPress={() => console.log('Pressed')}
+          onPress={() => console.log('add to favs')}
         />
       </View>
-      <View
-        style={{
-          marginTop: 0,
-          paddingTop: 0
-
-          // height: '45%',
-          // backgroundColor: 'green'
-          // marginTop: 5
-        }}
-      >
+      <View style={styles.imageView}>
         <FastImage
-          style={{
-            width,
-            height: height * 0.45,
-            marginTop: 0,
-            paddingTop: 0
-
-            // backgroundColor: 'yellow'
-          }}
+          style={[styles.itemImage, { width, height: height * 0.45 }]}
           source={{
             uri: item.image,
             priority: FastImage.priority.normal
@@ -61,40 +47,29 @@ const Item: React.FC<ItemProps> = ({ route }) => {
           icon="cart-plus"
           color={Colors.white}
           size={40}
-          style={{
-            position: 'absolute',
-            // left: 0,
-            right: 0,
-            bottom: 0,
-            // margin: 20,
-            // padding: 15,
-            // bottom: 0
-            backgroundColor: Colors.orange800
-          }}
+          style={styles.addToCart}
           onPress={() => console.log('Pressed')}
         />
       </View>
       <View
-        style={{
-          backgroundColor: 'pink',
-          width,
-          height: height * 0.55,
-          alignItems: 'flex-start',
-          flexDirection: 'column'
-        }}
+        style={[
+          styles.itemDetailsView,
+          {
+            width,
+            height: height * 0.55
+          }
+        ]}
       >
-        <Text style={{ fontWeight: 'bold', fontSize: 20 }}>
-          {item.itemName}
-        </Text>
-        <Text style={{ fontSize: 15, fontWeight: 'bold' }}>
+        <Text style={styles.itemName}>{item.itemName}</Text>
+        <Text style={styles.itemProperties}>
           {item.category.charAt(0).toUpperCase() + item.category.slice(1)}
         </Text>
-        <View style={{ width, flexDirection: 'row' }}>
-          <Text style={{ fontSize: 15, fontWeight: 'bold' }}>
+        <View style={[styles.itemGroupProperties, { width }]}>
+          <Text style={styles.itemProperties}>
             {item.size}
             {item.unit}
           </Text>
-          <Text style={{ fontSize: 15, fontWeight: 'bold' }}>{item.price}</Text>
+          <Text style={styles.itemProperties}>{item.price}</Text>
         </View>
       </View>
     </View>
