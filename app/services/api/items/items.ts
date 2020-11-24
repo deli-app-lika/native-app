@@ -7,6 +7,8 @@ const getIngredients = async (cocktail: ICocktail) => {
   ingredients.forEach(async (ingredient) => {
     const item = await firestore()
       .collection('inventory')
+      // TODO update
+      // @ts-ignore
       .where('searchName', '==', ingredient.name.toLowerCase())
       .get();
 
