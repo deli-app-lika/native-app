@@ -18,6 +18,7 @@ const Categories: React.FC<CategoriesProps> = ({ category }) => {
 
   const getCocktails = useCallback(async () => {
     const fetchedCocktails = await getCategoryCocktails(category);
+    console.log('ccccccccccccccccccccccccccccccccccccccc', fetchedCocktails);
     setCocktails(fetchedCocktails);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -48,6 +49,8 @@ const Categories: React.FC<CategoriesProps> = ({ category }) => {
           <FastImage
             style={styles.Image}
             source={{
+              // TODO
+              // @ts-ignore
               uri: cocktail.thumbnail,
               priority: FastImage.priority.normal
             }}
