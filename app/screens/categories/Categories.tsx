@@ -14,14 +14,12 @@ interface CategoriesProps {
 }
 
 const Categories: React.FC<CategoriesProps> = ({ category }) => {
-  // TODO 47
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [cocktails, setCocktails] = useState<ICocktail[]>([]);
 
   const getCocktails = useCallback(async () => {
     const fetchedCocktails = await getCategoryCocktails(category);
-    console.log('ccccccccccccccccccccccccccccccccccccccc', fetchedCocktails);
-    // setCocktails(fetchedCocktails);
+    setCocktails(fetchedCocktails);
+    console.log('In Catss', cocktails, 'end in cats');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
