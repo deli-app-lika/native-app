@@ -1,16 +1,17 @@
 export interface ICocktail {
   uid: string;
   name: string;
+  searchName: string;
   ingredients: IIngredients[];
   instructions: string;
-  images: [];
-  thumbnail: string;
+  image: string;
   category: string;
 }
 
 export interface IIngredients {
-  name: string;
+  ingredient: string;
+  category: string;
+  image: string;
   portion: string;
-  searchableName: string;
-  itemType: string[];
+  itemId: string;
 }
