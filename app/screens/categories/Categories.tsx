@@ -51,7 +51,7 @@ const Categories: React.FC<CategoriesProps> = ({ category }) => {
             source={{
               // TODO
               // @ts-ignore
-              uri: cocktail.thumbnail,
+              uri: cocktail.image,
               priority: FastImage.priority.normal
             }}
             resizeMode={FastImage.resizeMode.contain}
