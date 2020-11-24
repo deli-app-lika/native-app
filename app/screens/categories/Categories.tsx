@@ -19,6 +19,7 @@ const Categories: React.FC<CategoriesProps> = ({ category }) => {
   const getCocktails = useCallback(async () => {
     const fetchedCocktails = await getCategoryCocktails(category);
     setCocktails(fetchedCocktails);
+    // console.log('In Catss', cocktails, 'end in cats');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -35,7 +36,7 @@ const Categories: React.FC<CategoriesProps> = ({ category }) => {
       </View>
     );
   }
-  const renderCocktails = cocktails.map((cocktail) => {
+  const renderCocktails = cocktails.map((cocktail: ICocktail) => {
     return (
       <TouchableOpacity
         key={cocktail.uid}
@@ -48,7 +49,7 @@ const Categories: React.FC<CategoriesProps> = ({ category }) => {
           <FastImage
             style={styles.Image}
             source={{
-              uri: cocktail.thumbnail,
+              uri: cocktail.image,
               priority: FastImage.priority.normal
             }}
             resizeMode={FastImage.resizeMode.contain}

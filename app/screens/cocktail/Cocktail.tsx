@@ -54,6 +54,8 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
         <FastImage
           style={{ width, height: height * 0.25 }}
           source={{
+            // TODO
+            // @ts-ignore
             uri: params.thumbnail,
             priority: FastImage.priority.normal
           }}
