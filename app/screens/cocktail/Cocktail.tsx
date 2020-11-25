@@ -5,7 +5,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Colors, IconButton, Text } from 'react-native-paper';
 import NavigationService from '../../navigation/NavigationService';
 import { BartenderStackNavProps } from '../../navigation/types/BartenderParamList';
-import getIngredients from '../../services/api/items/items';
+import getIngredients from '../../services/api/ingredients/ingredients';
 import styles from './styles';
 
 // interface CocktailProps {
