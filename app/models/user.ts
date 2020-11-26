@@ -4,7 +4,12 @@ export interface IUser {
   isLoggedIn: boolean;
   isNewUser: boolean;
   uid: string;
+  anonymousId?: string;
   isAnonymous: boolean;
+  providerId?: string;
+  email?: string;
+  fullName?: string;
+  deliveryAddress?: any;
   location: {
     long: number | null;
     lat: number | null;

@@ -7,16 +7,14 @@ import styles from './style';
 import NavigationService from '../NavigationService';
 import { logout } from '../../actions/authActions';
 import { AppState } from '../../store/configureStore';
-import { IAnonymousUser } from '../../models/user';
+import { IUser } from '../../models/user';
 
 interface LikaDrawerProps {
   props: any;
 }
 
 const LikaDrawer: React.FC<LikaDrawerProps> = (props) => {
-  const user = useSelector(
-    (state: AppState) => state.default as IAnonymousUser
-  );
+  const user = useSelector((state: AppState) => state.default as IUser);
   const dispatch = useDispatch();
 
   //  sign out
@@ -26,6 +24,7 @@ const LikaDrawer: React.FC<LikaDrawerProps> = (props) => {
       .then(() => {
         dispatch(logout(user.location));
       });
+    NavigationService.navigate('Home');
   };
 
   return (
@@ -51,7 +50,11 @@ const LikaDrawer: React.FC<LikaDrawerProps> = (props) => {
           <TouchableOpacity onPress={() => {}}>
             <Text style={styles.DrawerHeaderText}>ACCOUNT</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity
+            onPress={() => {
+              NavigationService.navigate('Account');
+            }}
+          >
             <Text style={styles.DrawerItem}>Account Details</Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -73,7 +76,7 @@ const LikaDrawer: React.FC<LikaDrawerProps> = (props) => {
           <Text style={styles.DrawerItem}>Contact Us</Text>
           <Text style={styles.DrawerItem}>Terms of Service</Text>
           <Text style={styles.DrawerItem}>Privacy Policy</Text>
-          {!user.isNewUser ? (
+          {!user.isAnonymous ? (
             <TouchableOpacity
               onPress={() => {
                 signUserOut();
@@ -82,7 +85,11 @@ const LikaDrawer: React.FC<LikaDrawerProps> = (props) => {
               <Text style={styles.DrawerItem}>Logout</Text>
             </TouchableOpacity>
           ) : (
-            <TouchableOpacity onPress={() => {}}>
+            <TouchableOpacity
+              onPress={() => {
+                NavigationService.navigate('Login');
+              }}
+            >
               <Text style={styles.DrawerItem}>Login</Text>
             </TouchableOpacity>
           )}
