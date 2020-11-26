@@ -8,7 +8,6 @@ import {
   IconButton,
   Text
 } from 'react-native-paper';
-import { ICocktail } from '../../models/cocktail';
 import NavigationService from '../../navigation/NavigationService';
 import { BartenderStackNavProps } from '../../navigation/types/BartenderParamList';
 import getIngredients, {
@@ -46,13 +45,14 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const renderIngredients = ingredientsList.map((cocktail: ICocktail) => {
-    console.log('cocktail===', cocktail);
+  const renderIngredients = ingredientsList.map((ingre: any) => {
+    console.log('ingre===', ingre);
     return (
       <TouchableOpacity
-        key={cocktail.uid}
+        key={ingre.uid}
         onPress={() => {
-          NavigationService.navigate('Cocktail', cocktail);
+          console.log('on press ingredient');
+          // NavigationService.navigate('Cocktail', cocktail);
           // route.navigation.navigate('Cocktail');
         }}
       >
@@ -72,8 +72,10 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
             }}
             // resizeMode={FastImage.resizeMode.contain}
           />
-          <Text style={styles.ingredientText}>LICOR IMPORTADO</Text>
-          <Text style={styles.ingredientPrice}>$50.00</Text>
+          <Text style={styles.ingredientText}>{ingre.ingredient}</Text>
+          <Text style={styles.ingredientPrice}>
+            {ingre.outOfStock ? 'n/a' : ingre.price}
+          </Text>
         </View>
       </TouchableOpacity>
     );
@@ -85,16 +87,6 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (ingredientsList.length > 0) {
-    // @ts-ignore
-    // eslint-disable-next-line no-underscore-dangle
-    console.log('list', ingredientsList[0].response._docs);
-    // @ts-ignore
-    // eslint-disable-next-line no-underscore-dangle
-    // console.log('list', ingredientsList[0]);
-  } else {
-    console.log('mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmote set');
-  }
   return (
     <View style={styles.container}>
       <View style={styles.topHeader}>
