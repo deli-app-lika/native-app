@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { PermissionsAndroid, Platform, View } from 'react-native';
+import { PermissionsAndroid, Platform } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Geolocation, {
@@ -14,9 +14,8 @@ import {
   StackHeaderProps
 } from '@react-navigation/stack';
 
-import { Colors, IconButton, Text } from 'react-native-paper';
 import { setUserLocation } from '../../actions/authActions';
-import Account from '../../screens/Account';
+// import Account from '../../screens/Account/Account';
 import Help from '../../screens/Help';
 import addAnonymousUser from '../../services/api/firebase/users';
 import { getLocationPermission } from '../../services/api/permissions/location';
@@ -28,6 +27,10 @@ import LikaDrawer from './LikaDrawer';
 import Payments from '../../screens/Payments/Payments';
 import styles from './style';
 import NewCardEntry from '../../screens/Payments/NewCardEntry';
+import StackHeader from './StackHeader';
+import Account from '../../screens/account/Account';
+import LoginScreen from '../../screens/auth/login/LoginScreen';
+import RegisterScreen from '../../screens/auth/register/RegisterScreen';
 
 export const Drawer = createDrawerNavigator();
 const HomeStack = createStackNavigator<HomeParamList>();
@@ -105,24 +108,7 @@ const RenderHomeStack = () => {
         component={Payments}
         options={({ navigation }) => ({
           header: () => {
-            return (
-              <View style={styles.Header}>
-                <View style={styles.BackArrow}>
-                  <IconButton
-                    icon="keyboard-backspace"
-                    color={Colors.black}
-                    size={40}
-                    onPress={() => {
-                      // @ts-ignore
-                      navigation.goBack();
-                    }}
-                  />
-                </View>
-                <View style={styles.HeaderBody}>
-                  <Text style={styles.HeaderTitle}>LIKA</Text>
-                </View>
-              </View>
-            );
+            return <StackHeader navigation={navigation} />;
           }
         })}
       />
@@ -131,24 +117,34 @@ const RenderHomeStack = () => {
         component={NewCardEntry}
         options={({ navigation }) => ({
           header: () => {
-            return (
-              <View style={styles.Header}>
-                <View style={styles.BackArrow}>
-                  <IconButton
-                    icon="keyboard-backspace"
-                    color={Colors.black}
-                    size={40}
-                    onPress={() => {
-                      // @ts-ignore
-                      navigation.goBack();
-                    }}
-                  />
-                </View>
-                <View style={styles.HeaderBody}>
-                  <Text style={styles.HeaderTitle}>Input Card</Text>
-                </View>
-              </View>
-            );
+            return <StackHeader navigation={navigation} />;
+          }
+        })}
+      />
+      <HomeStack.Screen
+        name="Account"
+        component={Account}
+        options={({ navigation }) => ({
+          header: () => {
+            return <StackHeader navigation={navigation} />;
+          }
+        })}
+      />
+      <HomeStack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={({ navigation }) => ({
+          header: () => {
+            return <StackHeader disableBack navigation={navigation} />;
+          }
+        })}
+      />
+      <HomeStack.Screen
+        name="Register"
+        component={RegisterScreen}
+        options={({ navigation }) => ({
+          header: () => {
+            return <StackHeader disableBack navigation={navigation} />;
           }
         })}
       />
@@ -166,7 +162,6 @@ export const DrawerNav: React.FC<DrawerNavProps> = () => {
       drawerContent={(props) => <LikaDrawer {...props} />}
     >
       <Drawer.Screen name="Home" component={RenderHomeStack} />
-      <Drawer.Screen name="Account" component={Account} />
       <Drawer.Screen name="Help" component={Help} />
     </Drawer.Navigator>
   );
