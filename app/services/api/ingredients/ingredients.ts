@@ -1,43 +1,59 @@
-import firestore from '@react-native-firebase/firestore';
-import { ICocktail } from '../../../models/cocktail';
+import firestore, {
+  FirebaseFirestoreTypes
+} from '@react-native-firebase/firestore';
+import { ICocktail, IIngredients } from '../../../models/cocktail';
 
-// const getIngredients1 = (cocktail: ICocktail) => {
-//   const { ingredients } = cocktail;
-//   console.log('ingreedients', ingredients);
+export const cleanResults = (
+  results: Promise<{
+    response: FirebaseFirestoreTypes.QuerySnapshot<
+      FirebaseFirestoreTypes.DocumentData
+    >;
+    ingre: IIngredients;
+  }>[]
+) => {
+  console.log('clean results', results);
+  return results.map((result) => {
+    // @ts-ignore
+    const { ingre } = result;
+    let inventoryData = { outOfStock: true };
+    // @ts-ignore
+    if (result.response.docs.length > 0) {
+      inventoryData = {
+        // @ts-ignore
+        // eslint-disable-next-line no-underscore-dangle
+        itemQuantity: result.response.docs[0]._data.itemQuantity,
+        // @ts-ignore
+        // eslint-disable-next-line no-underscore-dangle
+        uid: result.response.docs[0]._data.uid,
+        // @ts-ignore
+        // eslint-disable-next-line no-underscore-dangle
+        currency: result.response.docs[0]._data.currency,
+        // @ts-ignore
+        // eslint-disable-next-line no-underscore-dangle
+        price: result.response.docs[0]._data.price,
+        // @ts-ignore
+        // eslint-disable-next-line no-underscore-dangle
+        size: result.response.docs[0]._data.size,
+        // @ts-ignore
+        // eslint-disable-next-line no-underscore-dangle
+        unit: result.response.docs[0]._data.unit,
+        // @ts-ignore
+        // eslint-disable-next-line no-underscore-dangle
+        outOfStock: !(result.response.docs[0]._data.itemQuantity > 0)
+      };
+    }
 
-//   const inventoryRef = firestore()
-//     .collection('Shops')
-//     // TODO use geo location to get shop
-//     .doc('b36af212-d100-46ed-a758-71c7d2e1040c')
-//     .collection('Inventory');
+    const ingreForList = {
+      ...inventoryData,
+      ...ingre
+    };
+    // @ts-ignore
+    // eslint-disable-next-line no-underscore-dangle
+    console.log('result inside', ingreForList);
 
-//   // const ingredientList =
-//   let i = 0;
-//   return ingredients.map(async (ingredient) => {
-//     i += 1;
-//     const item = await inventoryRef
-//       // TODO update this query to use name and not itemName
-//       .where('itemName', '==', ingredient.ingredient)
-//       .get();
-
-//     console.log('shoppppp', i, item);
-
-//     if (item.empty) {
-//       console.log('No matching documents.');
-//       // eslint-disable-next-line no-useless-return
-//       return;
-//     }
-//     return item;
-
-//     // item.forEach((doc) => {
-//     //   console.log('results loop', doc.id, '=>', doc.data());
-//     // });
-
-//     // eslint-disable-next-line consistent-return
-//     // return item;
-//   });
-//   // return ingredientList;
-// };
+    return ingreForList;
+  });
+};
 
 const getIngredients = async (cocktail: ICocktail) => {
   const { ingredients } = cocktail;
@@ -55,14 +71,24 @@ const getIngredients = async (cocktail: ICocktail) => {
       // TODO update this query to use name and not itemName
       .where('itemName', '==', ingre.ingredient)
       .get();
-
+    // TODO log when no match found
     return {
-      response
+      response,
+      ingre
     };
   });
-  const results = await Promise.all(promises);
-  return results;
+  // const results = await Promise.all(promises);
+  // @ts-ignore
+  // return cleanResults(results);
+  // return results;
   // return promises;
+  // const done = await Promise.all(promises).then((data) => {
+  //   // @ts-ignore
+  //   const doneData = cleanResults(data);
+  //   return doneData;
+  // });
+
+  return promises;
 };
 
 export default getIngredients;
