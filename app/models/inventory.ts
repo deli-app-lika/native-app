@@ -1,5 +1,5 @@
-export interface IItem {
-  category: ICategory;
+export interface IInventory {
+  category: string;
   image: string;
   currency: string;
   itemName: string;

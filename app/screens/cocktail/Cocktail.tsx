@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Dimensions, ScrollView, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -13,13 +13,26 @@ import styles from './styles';
 // }
 
 const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
+  const [ingredientsList, setIngredientsList] = useState<any[]>([]);
   const { params } = route;
   const { height } = Dimensions.get('window');
   const { width } = Dimensions.get('window');
 
   const fetchInventory = useCallback(async () => {
     try {
-      await getIngredients(params);
+      const temp = getIngredients(params);
+      console.log('temp', temp);
+      setIngredientsList(await Promise.all(temp));
+
+      // Promise.all(temp).then((results) => {
+      //   setIngredientsList(results);
+      // });
+      // @ts-ignore
+
+      // // @ts-ignore
+      // getIngredients(params).then((returnedIngredients) => {
+      //   setIngredientsList(returnedIngredients);
+      // });
     } catch (e) {
       // TODO: Redirect to auth screen and logout user
       console.log(e);
@@ -29,9 +42,20 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
 
   useEffect(() => {
     fetchInventory();
+    console.log('ready list yo', ingredientsList);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  if (ingredientsList.length > 0) {
+    // @ts-ignore
+    // eslint-disable-next-line no-underscore-dangle
+    console.log('list', ingredientsList[0].response._docs);
+    // @ts-ignore
+    // eslint-disable-next-line no-underscore-dangle
+    // console.log('list', ingredientsList[0]);
+  } else {
+    console.log('mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmote set');
+  }
   return (
     <View style={styles.container}>
       <View style={styles.topHeader}>
