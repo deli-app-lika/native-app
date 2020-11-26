@@ -14,6 +14,7 @@ import {
 } from 'react-native-paper';
 import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
+import { GoogleSignin } from '@react-native-community/google-signin';
 import NavigationService from '../../../navigation/NavigationService';
 import styles from '../styles';
 import { LoginSchema } from '../../../utils/validations';
@@ -23,6 +24,11 @@ import authManager from '../../../services/auth/authManager';
 import { setUserData } from '../../../actions/authActions';
 
 interface LoginScreenProps {}
+
+GoogleSignin.configure({
+  webClientId:
+    '778808264448-po1f7ku96gtber8aoh8b3ucohb5euusf.apps.googleusercontent.com'
+});
 
 const LoginScreen: React.FC<LoginScreenProps> = () => {
   const user = useSelector((state: AppState) => state.default as IUser);
@@ -157,7 +163,22 @@ const LoginScreen: React.FC<LoginScreenProps> = () => {
                       ...styles.LoginContainer,
                       backgroundColor: Colors.orange900
                     }}
-                    // onPress={onLoginWithFacebook}
+                    onPress={async () => {
+                      try {
+                        const loggedInUser = await authManager.continueWithFacebook(
+                          user
+                        );
+                        // @ts-ignore
+                        if (loggedInUser.uid) {
+                          // @ts-ignore
+                          dispatch(setUserData(loggedInUser));
+                          NavigationService.navigate('Home');
+                        }
+                      } catch (error) {
+                        showModal();
+                        console.log(error);
+                      }
+                    }}
                   >
                     Continue with Facebook
                   </Button>
@@ -168,7 +189,22 @@ const LoginScreen: React.FC<LoginScreenProps> = () => {
                       ...styles.LoginContainer,
                       backgroundColor: Colors.orange900
                     }}
-                    // onPress={onLoginWithGoogle}
+                    onPress={async () => {
+                      try {
+                        const loggedInUser = await authManager.continueWithGoogle(
+                          user
+                        );
+                        // @ts-ignore
+                        if (loggedInUser.uid) {
+                          // @ts-ignore
+                          dispatch(setUserData(loggedInUser));
+                          NavigationService.navigate('Home');
+                        }
+                      } catch (error) {
+                        showModal();
+                        console.log(error);
+                      }
+                    }}
                   >
                     Continue with Google
                   </Button>

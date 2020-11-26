@@ -8,7 +8,9 @@ export interface IUser {
   isAnonymous: boolean;
   providerId?: string;
   email?: string;
+  emailVerified?: string;
   fullName?: string;
+  phoneNumber?: string;
   deliveryAddress?: any;
   location: {
     long: number | null;
