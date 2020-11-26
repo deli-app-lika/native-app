@@ -8,6 +8,7 @@ import {
   IconButton,
   Text
 } from 'react-native-paper';
+import { IIngredientInv } from '../../models/IngredientInvtory';
 import NavigationService from '../../navigation/NavigationService';
 import { BartenderStackNavProps } from '../../navigation/types/BartenderParamList';
 import getIngredients, {
@@ -45,11 +46,11 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const renderIngredients = ingredientsList.map((ingre: any) => {
+  const renderIngredients = ingredientsList.map((ingre: IIngredientInv) => {
     console.log('ingre===', ingre);
     return (
       <TouchableOpacity
-        key={ingre.uid}
+        key={ingre.invID}
         onPress={() => {
           console.log('on press ingredient');
           // NavigationService.navigate('Cocktail', cocktail);

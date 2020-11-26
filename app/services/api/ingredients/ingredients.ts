@@ -72,22 +72,19 @@ const getIngredients = async (cocktail: ICocktail) => {
       .where('itemName', '==', ingre.ingredient)
       .get();
     // TODO log when no match found
+    if (response.empty) {
+      console.log(
+        '***ingredient not found in store inventory',
+        response,
+        ingre
+      );
+    }
+
     return {
       response,
       ingre
     };
   });
-  // const results = await Promise.all(promises);
-  // @ts-ignore
-  // return cleanResults(results);
-  // return results;
-  // return promises;
-  // const done = await Promise.all(promises).then((data) => {
-  //   // @ts-ignore
-  //   const doneData = cleanResults(data);
-  //   return doneData;
-  // });
-
   return promises;
 };
 
