@@ -6,6 +6,9 @@ export type HomeParamList = {
   Home: undefined;
   Payments: undefined;
   InputPayment: undefined;
+  Account: undefined;
+  Login: undefined;
+  Register: undefined;
 };
 
 export type HomeNavProps<T extends keyof HomeParamList> = {

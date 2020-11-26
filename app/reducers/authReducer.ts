@@ -22,10 +22,12 @@ const auth = (state = initialState, action: IAction) => {
     case UPDATE_USER:
       return {
         ...state,
-        isLoggedIn: true,
-        isNewUser: action.data.isNewUser,
-        uid: action.data.uid,
-        isAnonymous: action.data.isAnonymous
+        ...action.data
+        // isLoggedIn: true,
+
+        // isNewUser: action.data.isNewUser,
+        // uid: action.data.uid,
+        // isAnonymous: action.data.isAnonymous
       };
     case UPDATE_USER_LOCATION:
       return {
