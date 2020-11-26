@@ -20,9 +20,10 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
 
   const fetchInventory = useCallback(async () => {
     try {
-      const temp = getIngredients(params);
+      const temp = await getIngredients(params);
       console.log('temp', temp);
-      setIngredientsList(await Promise.all(temp));
+      // setIngredientsList(await Promise.all(temp));
+      setIngredientsList(temp);
 
       // Promise.all(temp).then((results) => {
       //   setIngredientsList(results);

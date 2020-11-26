@@ -39,7 +39,7 @@ import { ICocktail } from '../../../models/cocktail';
 //   // return ingredientList;
 // };
 
-const getIngredients = (cocktail: ICocktail) => {
+const getIngredients = async (cocktail: ICocktail) => {
   const { ingredients } = cocktail;
   console.log('ingreedients', ingredients);
 
@@ -60,8 +60,9 @@ const getIngredients = (cocktail: ICocktail) => {
       response
     };
   });
-  // const results = await Promise.all(promises);
-  return promises;
+  const results = await Promise.all(promises);
+  return results;
+  // return promises;
 };
 
 export default getIngredients;
