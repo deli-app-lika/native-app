@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
-import { TextInput } from 'react-native-paper';
+import { View } from 'react-native';
+import { TextInput, Text } from 'react-native-paper';
+import { useSelector } from 'react-redux';
+import { IUser } from '../../models/user';
+import { AppState } from '../../store/configureStore';
 import styles from './styles';
 
 interface AccountProps {}
 
 const Account: React.FC<AccountProps> = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const user = useSelector((state: AppState) => state.default as IUser);
+  const [name, setName] = useState(user.fullName);
+  const [email, setEmail] = useState(user.email);
   const [birthday, setBirthday] = useState('');
-  const [phone, setPhone] = useState('');
+  const [phone, setPhone] = useState(user.phoneNumber);
   return (
     <View style={styles.container}>
       <Text style={styles.Title}>Account Details</Text>
@@ -19,6 +23,7 @@ const Account: React.FC<AccountProps> = () => {
         label="Full Name"
         value={name}
         onChangeText={(text) => setName(text)}
+        left={() => <Text>Change</Text>}
       />
       <TextInput
         style={styles.TextBox}

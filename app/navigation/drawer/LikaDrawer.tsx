@@ -52,7 +52,11 @@ const LikaDrawer: React.FC<LikaDrawerProps> = (props) => {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              NavigationService.navigate('Account');
+              if (user.isAnonymous) {
+                NavigationService.navigate('Login');
+              } else {
+                NavigationService.navigate('Account');
+              }
             }}
           >
             <Text style={styles.DrawerItem}>Account Details</Text>
