@@ -166,7 +166,22 @@ const RegisterScreen: React.FC<RegisterScreenProps> = () => {
                       ...styles.LoginContainer,
                       backgroundColor: Colors.orange900
                     }}
-                    // onPress={onLoginWithFacebook}
+                    onPress={async () => {
+                      try {
+                        const loggedInUser = await authManager.continueWithFacebook(
+                          user
+                        );
+                        // @ts-ignore
+                        if (loggedInUser.uid) {
+                          // @ts-ignore
+                          dispatch(setUserData(loggedInUser));
+                          NavigationService.navigate('Home');
+                        }
+                      } catch (error) {
+                        showModal();
+                        console.log(error);
+                      }
+                    }}
                   >
                     Continue with Facebook
                   </Button>
@@ -177,7 +192,22 @@ const RegisterScreen: React.FC<RegisterScreenProps> = () => {
                       ...styles.LoginContainer,
                       backgroundColor: Colors.orange900
                     }}
-                    // onPress={onLoginWithGoogle}
+                    onPress={async () => {
+                      try {
+                        const loggedInUser = await authManager.continueWithGoogle(
+                          user
+                        );
+                        // @ts-ignore
+                        if (loggedInUser.uid) {
+                          // @ts-ignore
+                          dispatch(setUserData(loggedInUser));
+                          NavigationService.navigate('Home');
+                        }
+                      } catch (error) {
+                        showModal();
+                        console.log(error);
+                      }
+                    }}
                   >
                     Continue with Google
                   </Button>
