@@ -6,6 +6,7 @@ export type BartenderParamList = {
   Home: undefined;
   Cocktail: ICocktail;
   Cart: undefined;
+  Item: undefined;
 };
 
 export type BartenderStackNavProps<T extends keyof BartenderParamList> = {
