@@ -7,6 +7,7 @@ import { BartenderParamList } from '../navigation/types/BartenderParamList';
 import Cart from './cart/Cart';
 import Categories from './categories/Categories';
 import Cocktail from './cocktail/Cocktail';
+import Item from './item/Item';
 
 interface BartenderProps {}
 
@@ -66,6 +67,7 @@ const Bartender: React.FC<BartenderProps> = () => {
       <BartenderStack.Screen name="Home" component={Category} />
       <BartenderStack.Screen name="Cocktail" component={Cocktail} />
       <BartenderStack.Screen name="Cart" component={Cart} />
+      <BartenderStack.Screen name="Item" component={Item} />
     </BartenderStack.Navigator>
   );
 };
