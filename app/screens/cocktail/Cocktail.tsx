@@ -87,7 +87,7 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
           />
           <Text style={styles.ingredientText}>{ingre.ingredient}</Text>
           <Text style={styles.ingredientPrice}>
-            {ingre.outOfStock ? 'n/a' : ingre.price}
+            {ingre.outOfStock ? 'n/a' : `$${ingre.price}`}
           </Text>
         </View>
       </TouchableOpacity>
@@ -135,8 +135,8 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
         <View style={styles.cartButton}>
           <TouchableOpacity
             onPress={() => {
-              console.log('pressed');
-              NavigationService.navigate('Cart', params);
+              console.log('pressed add to cart');
+              // NavigationService.navigate('Cart', params);
             }}
           >
             <Text style={styles.buttonText}>Add to Cart</Text>
@@ -159,7 +159,7 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
         <Text style={styles.textDisplay}>Directions</Text>
         <View style={styles.cartButton}>
           <TouchableOpacity onPress={() => console.log('pressed')}>
-            <Text style={styles.buttonText}>Text Me Recipe</Text>
+            <Text style={styles.buttonText}>Share</Text>
           </TouchableOpacity>
         </View>
       </View>
