@@ -48,12 +48,24 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
 
   const renderIngredients = ingredientsList.map((ingre: IIngredientInv) => {
     console.log('ingre===', ingre);
+
+    const inventoryItem = {
+      category: ingre.category,
+      image: ingre.image,
+      currency: ingre.currency,
+      itemName: ingre.ingredient,
+      itemQuantity: ingre.itemQuantity,
+      price: ingre.price,
+      size: ingre.size,
+      unit: ingre.unit
+    };
+
     return (
       <TouchableOpacity
-        key={ingre.invID}
+        key={ingre.itemId}
         onPress={() => {
           console.log('on press ingredient');
-          // NavigationService.navigate('Cocktail', cocktail);
+          NavigationService.navigate('Item', inventoryItem);
           // route.navigation.navigate('Cocktail');
         }}
       >
