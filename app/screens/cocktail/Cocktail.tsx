@@ -30,7 +30,9 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
   const { height } = Dimensions.get('window');
   const { width } = Dimensions.get('window');
   const cart = useSelector(
-    (state: AppState) => state.default.cart as ICartItem[]
+    // TODO not sure what ts is refering to with any[]
+    // @ts-ignore
+    (state: AppState) => state.default.cart.cart as ICartItem[]
   );
   const dispatch = useDispatch();
 

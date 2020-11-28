@@ -18,7 +18,7 @@ const Cart = ({ route }: any) => {
   const dispatch = useDispatch();
   // const [initializing, setInitializing] = useState(true);
   const cart = useSelector(
-    (state: AppState) => state.default.cart as ICartItem[]
+    (state: AppState) => state.default.cart.cart as ICartItem[]
   );
   const userLoggedIn = useSelector(
     (state: AppState) => state.default.isLoggedIn as boolean
@@ -98,7 +98,12 @@ const Cart = ({ route }: any) => {
               <Text style={styles.summaryPriceItemValue}>$8.02</Text>
             </View>
             <View style={styles.summaryPriceLine}>
-              <Text style={styles.summaryPriceTotal}>Estimated Tax:</Text>
+              <Text style={styles.summaryPriceItemTitle}>Delivery Fee:</Text>
+              {/* TODO get this value from shop? */}
+              <Text style={styles.summaryPriceItemValue}>$8.02</Text>
+            </View>
+            <View style={styles.summaryPriceLine}>
+              <Text style={styles.summaryPriceTotal}>Estimated Total:</Text>
               <Text style={styles.summaryPriceTotalValue}>$8.02</Text>
             </View>
           </View>
