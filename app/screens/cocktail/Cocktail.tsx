@@ -9,7 +9,7 @@ import {
   Text
 } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
-import { addToCart } from '../../actions/cartActions';
+import { addToCart } from '../../actions/authActions';
 import { IIngredientInv } from '../../models/IngredientInvtory';
 import NavigationService from '../../navigation/NavigationService';
 import { BartenderStackNavProps } from '../../navigation/types/BartenderParamList';
@@ -27,7 +27,6 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
   const { params } = route;
   const { height } = Dimensions.get('window');
   const { width } = Dimensions.get('window');
-
   const dispatch = useDispatch();
 
   const fetchInventory = useCallback(async () => {

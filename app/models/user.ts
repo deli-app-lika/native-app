@@ -1,3 +1,4 @@
+import { ICartItem } from './cartItem';
 import { ILocation } from './location';
 
 export interface IUser {
@@ -16,12 +17,14 @@ export interface IUser {
     long: number | null;
     lat: number | null;
   };
+  cart: ICartItem[];
 }
 
 export interface IAnonymousUser {
   isNewUser: true;
   isLoggedIn: false;
   location: ILocation;
+  cart: ICartItem[];
 }
 // everything except provider data and provider id.
 // const FireBase user auth example = {
