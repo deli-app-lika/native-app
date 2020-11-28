@@ -4,6 +4,7 @@ import {
   UPDATE_USER,
   UPDATE_USER_LOCATION
 } from '../actions/authActions';
+import { ICartItem } from '../models/cartItem';
 import { IAnonymousUser, IUser } from '../models/user';
 
 const initialState: IAnonymousUser | IUser = {
@@ -14,7 +15,7 @@ const initialState: IAnonymousUser | IUser = {
 };
 
 interface IAction {
-  data: IUser;
+  data: IUser | ICartItem[];
   type: string;
 }
 
@@ -40,10 +41,11 @@ const auth = (state = initialState, action: IAction) => {
       return { ...initialState, location: action.data };
     }
     case ADD_TO_CART:
-      console.log('in cart reducer', action.data);
+      console.log('in cart reducer', action.data, 'current cart', state.cart);
       return {
         ...state,
-        cart: { ...state.cart, ...action.data }
+        // @ts-ignore
+        cart: [...state.cart, ...action.data]
       };
     default:
       return state;

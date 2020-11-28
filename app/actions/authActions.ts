@@ -1,3 +1,4 @@
+import { ICartItem } from '../models/cartItem';
 import { IUser } from '../models/user';
 
 export const SET_AUTH = 'SET_AUTH';
@@ -31,7 +32,7 @@ export const logout = (location: {
   data: location
 });
 
-export const addToCart = (data: any) => ({
+export const addToCart = (data: ICartItem[]) => ({
   type: ADD_TO_CART,
   data
 });

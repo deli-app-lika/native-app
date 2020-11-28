@@ -5,11 +5,11 @@ export interface ICartItem {
   ingredient: string;
   itemId: string;
   outOfStock: boolean;
-  currency: string;
-  itemQuantity: number;
-  price: number;
-  size: number;
-  unit: string;
-  invID: string;
+  currency?: string;
+  itemQuantity?: number;
+  price?: number;
+  size?: number;
+  unit?: string;
+  invID?: string;
   purchaseQuantity: number;
 }

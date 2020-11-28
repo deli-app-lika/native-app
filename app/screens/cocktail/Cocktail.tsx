@@ -159,7 +159,7 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
       </View>
       <View style={styles.ingredientsList}>
         <ScrollView>
-          {ingredientsList && ingredientsList.length > 1 ? (
+          {ingredientsList && ingredientsList.length > 0 ? (
             renderIngredients
           ) : (
             <View style={styles.container}>
