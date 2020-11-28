@@ -8,12 +8,16 @@ import {
   IconButton,
   Text
 } from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
+import { addNewItemToCart, updateItemQtyCart } from '../../actions/authActions';
+import { ICartItem } from '../../models/cartItem';
 import { IIngredientInv } from '../../models/IngredientInvtory';
 import NavigationService from '../../navigation/NavigationService';
 import { BartenderStackNavProps } from '../../navigation/types/BartenderParamList';
 import getIngredients, {
   cleanResults
 } from '../../services/api/ingredients/ingredients';
+import { AppState } from '../../store/configureStore';
 import styles from './styles';
 
 // interface CocktailProps {
@@ -25,19 +29,19 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
   const { params } = route;
   const { height } = Dimensions.get('window');
   const { width } = Dimensions.get('window');
+  const cart = useSelector(
+    (state: AppState) => state.default.cart as ICartItem[]
+  );
+  const dispatch = useDispatch();
 
   const fetchInventory = useCallback(async () => {
     try {
       const temp = await getIngredients(params);
-      console.log('temp', temp);
-
       const done = await Promise.all(temp).then((data) => {
         // @ts-ignore
         const doneData = cleanResults(data);
-        console.log('actually done', doneData);
         return doneData;
       });
-      console.log('done yoooooooo');
       // @ts-ignore
       setIngredientsList(done);
     } catch (e) {
@@ -47,8 +51,6 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
   }, []);
 
   const renderIngredients = ingredientsList.map((ingre: IIngredientInv) => {
-    console.log('ingre===', ingre);
-
     const inventoryItem = {
       category: ingre.category,
       image: ingre.image,
@@ -64,7 +66,6 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
       <TouchableOpacity
         key={ingre.itemId}
         onPress={() => {
-          console.log('on press ingredient');
           NavigationService.navigate('Item', inventoryItem);
           // route.navigation.navigate('Cocktail');
         }}
@@ -94,9 +95,41 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
     );
   });
 
+  const handleAddToCart = () => {
+    const newCartItems: ICartItem[] = [];
+    ingredientsList
+      .filter((itemIngredient: IIngredientInv) => !itemIngredient.outOfStock)
+      .forEach((ingredient: IIngredientInv) => {
+        // check if item is already in the cart
+        if (
+          cart.some(
+            (cartItem) =>
+              cartItem.invID === ingredient.invID &&
+              cartItem.itemId === ingredient.itemId
+          )
+        ) {
+          console.log('update item in cart');
+          dispatch(updateItemQtyCart({ cartItem: ingredient, addQty: 1 }));
+        } else {
+          newCartItems.push({ ...ingredient, purchaseQuantity: 1 });
+          console.log('add item to cart');
+        }
+      });
+    if (newCartItems.length > 0) {
+      dispatch(addNewItemToCart(newCartItems));
+    }
+    // const templist = ingredientsList
+    //   .filter((itemIngredient: IIngredientInv) => !itemIngredient.outOfStock)
+    //   .map((itemIngredient: IIngredientInv) => {
+    //     return { ...itemIngredient, purchaseQuantity: 1 };
+    //   });
+    // console.log('templist', templist);
+    // // return templist;
+    // dispatch(addToCart(templist));
+  };
+
   useEffect(() => {
     fetchInventory();
-    console.log('ready list yo', ingredientsList);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -136,6 +169,7 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
           <TouchableOpacity
             onPress={() => {
               console.log('pressed add to cart');
+              handleAddToCart();
               // NavigationService.navigate('Cart', params);
             }}
           >
@@ -145,7 +179,7 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
       </View>
       <View style={styles.ingredientsList}>
         <ScrollView>
-          {ingredientsList && ingredientsList.length > 1 ? (
+          {ingredientsList && ingredientsList.length > 0 ? (
             renderIngredients
           ) : (
             <View style={styles.container}>
@@ -158,7 +192,7 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
       <View style={styles.directionText}>
         <Text style={styles.textDisplay}>Directions</Text>
         <View style={styles.cartButton}>
-          <TouchableOpacity onPress={() => console.log('pressed')}>
+          <TouchableOpacity onPress={() => console.log('pressed share button')}>
             <Text style={styles.buttonText}>Share</Text>
           </TouchableOpacity>
         </View>
