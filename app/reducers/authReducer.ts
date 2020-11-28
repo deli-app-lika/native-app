@@ -1,18 +1,28 @@
 import {
+  ADD_NEW_ITEM_TO_CART,
   LOG_OUT,
+  UPDATE_ITEM_QTY_CART,
   UPDATE_USER,
   UPDATE_USER_LOCATION
 } from '../actions/authActions';
+import { ICartItem } from '../models/cartItem';
 import { IAnonymousUser, IUser } from '../models/user';
 
 const initialState: IAnonymousUser | IUser = {
   isNewUser: true,
   isLoggedIn: false,
-  location: { long: null, lat: null }
+  location: { long: null, lat: null },
+  cart: []
 };
 
 interface IAction {
-  data: IUser;
+  data:
+    | IUser
+    | ICartItem[]
+    | {
+        cartItem: ICartItem;
+        addQty: number;
+      };
   type: string;
 }
 
@@ -37,6 +47,31 @@ const auth = (state = initialState, action: IAction) => {
     case LOG_OUT: {
       return { ...initialState, location: action.data };
     }
+    case ADD_NEW_ITEM_TO_CART:
+      return {
+        ...state,
+        // @ts-ignore
+        cart: [...state.cart, ...action.data]
+      };
+    case UPDATE_ITEM_QTY_CART:
+      return {
+        ...state,
+        cart: state.cart.map((item) => {
+          if (
+            // @ts-ignore
+            item.invID === action.data.cartItem.invID &&
+            // @ts-ignore
+            item.itemId === action.data.cartItem.itemId
+          ) {
+            return {
+              ...item,
+              // @ts-ignore
+              purchaseQuantity: item.purchaseQuantity + action.data.addQty
+            };
+          }
+          return item;
+        })
+      };
     default:
       return state;
   }
