@@ -1,5 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
+import { Colors } from 'react-native-paper';
 import ScrollableTabView, {
   ScrollableTabBar
 } from 'react-native-scrollable-tab-view';
@@ -42,8 +43,9 @@ function CategoryTabs({ pressCategoryHandler }: any) {
       }}
       locked
       initialPage={0}
-      tabBarInactiveTextColor="green"
-      tabBarUnderlineStyle={{}}
+      tabBarInactiveTextColor={Colors.orange800}
+      tabBarActiveTextColor={Colors.red700}
+      tabBarUnderlineStyle={{ backgroundColor: Colors.red700 }}
       renderTabBar={() => (
         <ScrollableTabBar
           style={{ borderWidth: 0, marginLeft: 20, marginRight: 20 }}
