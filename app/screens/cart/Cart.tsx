@@ -23,7 +23,7 @@ const Cart = ({ route }: any) => {
   const renderCartItems = () => {
     return cart.map((cartItem: ICartItem) => {
       return (
-        <View style={styles.item}>
+        <View style={styles.item} key={cartItem.itemId}>
           <View style={styles.itemNameImage}>
             <FastImage
               style={styles.itemImage}
