@@ -2,7 +2,8 @@ import React from 'react';
 import { ScrollView, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { Button, Colors, IconButton, Text } from 'react-native-paper';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateItemQtyCart } from '../../actions/authActions';
 import NumberToggler from '../../components/numberToggler/NumberToggler';
 import { ICartItem } from '../../models/cartItem';
 import NavigationService from '../../navigation/NavigationService';
@@ -14,7 +15,7 @@ import styles from './styles';
 const Cart = ({ route }: any) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { params } = route;
-  // if cart recives a param of type cocktail
+  const dispatch = useDispatch();
   // const [initializing, setInitializing] = useState(true);
   const cart = useSelector(
     (state: AppState) => state.default.cart as ICartItem[]
@@ -22,6 +23,10 @@ const Cart = ({ route }: any) => {
   const userLoggedIn = useSelector(
     (state: AppState) => state.default.isLoggedIn as boolean
   );
+
+  const handleItemQty = (cItem: ICartItem, addQty: number) => {
+    dispatch(updateItemQtyCart({ cartItem: cItem, addQty }));
+  };
 
   const renderCartItems = () => {
     return cart.map((cartItem: ICartItem) => {
@@ -38,16 +43,12 @@ const Cart = ({ route }: any) => {
             <Text style={styles.itemText}>{cartItem.ingredient}</Text>
           </View>
           <View style={styles.numberToggler}>
-            <NumberToggler
-              // @ts-ignore
-              itemQty={cartItem.purchaseQuantity}
-              // @ts-ignore
-              maxQty={cartItem.itemQuantity}
-            />
+            <NumberToggler handleItemQty={handleItemQty} cartItem={cartItem} />
           </View>
           <View style={styles.itemPriceView}>
             <Text style={styles.itemPrice}>
-              ${Number(cartItem.price).toFixed(2)}
+              ${/* @ts-ignore */}
+              {Number(cartItem.price * cartItem.purchaseQuantity).toFixed(2)}
             </Text>
           </View>
         </View>
