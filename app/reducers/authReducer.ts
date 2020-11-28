@@ -27,7 +27,6 @@ interface IAction {
 }
 
 const auth = (state = initialState, action: IAction) => {
-  console.log('in reducer cart...');
   console.log('ACTION NOW', action);
   switch (action.type) {
     case UPDATE_USER:
@@ -49,14 +48,12 @@ const auth = (state = initialState, action: IAction) => {
       return { ...initialState, location: action.data };
     }
     case ADD_NEW_ITEM_TO_CART:
-      console.log('in cart reducer', action.data, 'current cart', state.cart);
       return {
         ...state,
         // @ts-ignore
         cart: [...state.cart, ...action.data]
       };
     case UPDATE_ITEM_QTY_CART:
-      console.log('update itme quty ');
       return {
         ...state,
         cart: state.cart.map((item) => {

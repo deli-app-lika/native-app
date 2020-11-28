@@ -43,7 +43,6 @@ export const updateItemQtyCart = (data: {
   cartItem: ICartItem;
   addQty: number;
 }) => {
-  console.log('in action update cart item');
   return {
     type: UPDATE_ITEM_QTY_CART,
     data
