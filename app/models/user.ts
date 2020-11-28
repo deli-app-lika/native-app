@@ -38,4 +38,5 @@ export interface ICart {
   estimatedTax: number;
   deliveryFee: number;
   serviceFee: number;
+  estimatedTotal: number;
 }

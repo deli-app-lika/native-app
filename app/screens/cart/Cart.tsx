@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateItemQtyCart } from '../../actions/authActions';
 import NumberToggler from '../../components/numberToggler/NumberToggler';
 import { ICartItem } from '../../models/cartItem';
+import { ICart } from '../../models/user';
 import NavigationService from '../../navigation/NavigationService';
 import { AppState } from '../../store/configureStore';
 import styles from './styles';
@@ -18,18 +19,22 @@ const Cart = ({ route }: any) => {
   const dispatch = useDispatch();
   // const [initializing, setInitializing] = useState(true);
   const cart = useSelector(
-    (state: AppState) => state.default.cart.cart as ICartItem[]
+    (state: AppState) =>
+      state.default.cart as {
+        cart: ICartItem[];
+        cost: ICart;
+      }
   );
   const userLoggedIn = useSelector(
     (state: AppState) => state.default.isLoggedIn as boolean
   );
-
+  console.log('cost', cart.cost);
   const handleItemQty = (cItem: ICartItem, addQty: number) => {
     dispatch(updateItemQtyCart({ cartItem: cItem, addQty }));
   };
 
   const renderCartItems = () => {
-    return cart.map((cartItem: ICartItem) => {
+    return cart.cart.map((cartItem: ICartItem) => {
       return (
         <View style={styles.item} key={cartItem.itemId}>
           <View style={styles.itemNameImage}>
@@ -72,9 +77,9 @@ const Cart = ({ route }: any) => {
         <View style={styles.itemList}>
           <View style={styles.cartTitle}>
             <Text style={styles.cartMainTitle}>Your Shopping Cart</Text>
-            <Text style={styles.cartSubTitle}>({cart.length} Items)</Text>
+            <Text style={styles.cartSubTitle}>({cart.cart.length} Items)</Text>
           </View>
-          {cart.length > 0 ? (
+          {cart.cart.length > 0 ? (
             <ScrollView>{renderCartItems()}</ScrollView>
           ) : (
             <Text>No items in cart</Text>
@@ -91,20 +96,28 @@ const Cart = ({ route }: any) => {
           <View style={styles.summaryPriceView}>
             <View style={styles.summaryPriceLine}>
               <Text style={styles.summaryPriceItemTitle}>Subtotal:</Text>
-              <Text style={styles.summaryPriceItemValue}>$87.96</Text>
+              <Text style={styles.summaryPriceItemValue}>
+                ${Number(cart.cost.subTotal).toFixed(2)}
+              </Text>
             </View>
             <View style={styles.summaryPriceLine}>
               <Text style={styles.summaryPriceItemTitle}>Estimated Tax:</Text>
-              <Text style={styles.summaryPriceItemValue}>$8.02</Text>
+              <Text style={styles.summaryPriceItemValue}>
+                ${Number(cart.cost.estimatedTax).toFixed(2)}
+              </Text>
             </View>
             <View style={styles.summaryPriceLine}>
               <Text style={styles.summaryPriceItemTitle}>Delivery Fee:</Text>
               {/* TODO get this value from shop? */}
-              <Text style={styles.summaryPriceItemValue}>$8.02</Text>
+              <Text style={styles.summaryPriceItemValue}>
+                ${Number(cart.cost.deliveryFee).toFixed(2)}
+              </Text>
             </View>
             <View style={styles.summaryPriceLine}>
               <Text style={styles.summaryPriceTotal}>Estimated Total:</Text>
-              <Text style={styles.summaryPriceTotalValue}>$8.02</Text>
+              <Text style={styles.summaryPriceTotalValue}>
+                ${Number(cart.cost.estimatedTotal).toFixed(2)}
+              </Text>
             </View>
           </View>
         </View>

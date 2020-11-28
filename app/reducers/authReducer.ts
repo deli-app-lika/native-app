@@ -14,7 +14,13 @@ const initialState: IAnonymousUser | IUser = {
   location: { long: null, lat: null },
   cart: {
     cart: [],
-    cost: { subTotal: 0, deliveryFee: 5, estimatedTax: 5, serviceFee: 5 }
+    cost: {
+      subTotal: 5,
+      deliveryFee: 5,
+      estimatedTax: 5,
+      serviceFee: 5,
+      estimatedTotal: 20
+    }
   }
 };
 
@@ -54,7 +60,7 @@ const auth = (state = initialState, action: IAction) => {
       return {
         ...state,
         cart: {
-          ...state.cart.cost,
+          cost: state.cart.cost,
           // @ts-ignore
           cart: [...state.cart.cart, ...action.data]
         }
@@ -63,7 +69,7 @@ const auth = (state = initialState, action: IAction) => {
       return {
         ...state,
         cart: {
-          ...state.cart.cost,
+          cost: state.cart.cost,
           cart: state.cart.cart.map((item) => {
             if (
               // @ts-ignore
