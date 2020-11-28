@@ -2,11 +2,12 @@
 import React, { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { Text } from 'react-native-paper';
+import { ICartItem } from '../../models/cartItem';
 import Styles from './styles';
 
 interface NumberTogglerProps {
-  itemQty: number;
-  maxQty: number;
+  handleItemQty: (cItem: ICartItem, addQty: number) => void;
+  cartItem: ICartItem;
 }
 interface ToggleButtonProps {
   isMinus: boolean;
@@ -27,18 +28,28 @@ const ToggleButton = ({ isMinus, onPress }: ToggleButtonProps) => {
   );
 };
 
-const NumberToggler: React.FC<NumberTogglerProps> = ({ itemQty, maxQty }) => {
-  const [count, setCount] = useState(itemQty || 1);
+const NumberToggler: React.FC<NumberTogglerProps> = ({
+  handleItemQty,
+  cartItem
+}) => {
+  const [count, setCount] = useState(cartItem.purchaseQuantity || 1);
   const minCount = 0;
-  // TODO Should max count be a prop value that is the total inventory number for this item?
-  const maxCount = maxQty || 10;
+  const maxCount = cartItem.itemQuantity || 10;
 
   const onPress = (isMinus: boolean) => {
     let newCount = 0;
     if (isMinus) {
-      newCount = count - 1 <= minCount ? minCount : count - 1;
+      if (count - 1 <= minCount) {
+        newCount = minCount;
+      } else {
+        newCount = count - 1;
+        handleItemQty(cartItem, -1);
+      }
+    } else if (count + 1 >= maxCount) {
+      newCount = maxCount;
     } else {
-      newCount = count + 1 >= maxCount ? maxCount : count + 1;
+      newCount = count + 1;
+      handleItemQty(cartItem, 1);
     }
     setCount(newCount);
   };
