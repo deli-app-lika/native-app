@@ -35,7 +35,12 @@ const Cart = ({ route }: any) => {
             <Text style={styles.itemText}>{cartItem.ingredient}</Text>
           </View>
           <View style={styles.numberToggler}>
-            <NumberToggler />
+            <NumberToggler
+              // @ts-ignore
+              itemQty={cartItem.purchaseQuantity}
+              // @ts-ignore
+              maxQty={cartItem.itemQuantity}
+            />
           </View>
           <View style={styles.itemPriceView}>
             <Text style={styles.itemPrice}>

@@ -4,7 +4,10 @@ import { TouchableOpacity, View } from 'react-native';
 import { Text } from 'react-native-paper';
 import Styles from './styles';
 
-interface NumberTogglerProps {}
+interface NumberTogglerProps {
+  itemQty: number;
+  maxQty: number;
+}
 interface ToggleButtonProps {
   isMinus: boolean;
   onPress: (isMinus: boolean) => void;
@@ -24,12 +27,11 @@ const ToggleButton = ({ isMinus, onPress }: ToggleButtonProps) => {
   );
 };
 
-const NumberToggler: React.FC<NumberTogglerProps> = () => {
-  // TODO update to take count value as props
-  const [count, setCount] = useState(1);
+const NumberToggler: React.FC<NumberTogglerProps> = ({ itemQty, maxQty }) => {
+  const [count, setCount] = useState(itemQty || 1);
   const minCount = 0;
   // TODO Should max count be a prop value that is the total inventory number for this item?
-  const maxCount = 10;
+  const maxCount = maxQty || 10;
 
   const onPress = (isMinus: boolean) => {
     let newCount = 0;
