@@ -19,6 +19,9 @@ const Cart = ({ route }: any) => {
   const cart = useSelector(
     (state: AppState) => state.default.cart as ICartItem[]
   );
+  const userLoggedIn = useSelector(
+    (state: AppState) => state.default.isLoggedIn as boolean
+  );
 
   const renderCartItems = () => {
     return cart.map((cartItem: ICartItem) => {
@@ -103,21 +106,35 @@ const Cart = ({ route }: any) => {
       <View
         style={[styles.sectionContainer, { flex: 1, justifyContent: 'center' }]}
       >
-        <View style={styles.accountView}>
-          <Button
-            mode="contained"
-            color={Colors.orange800}
-            onPress={() => {
-              console.log('press create account');
-            }}
-          >
-            <Text style={{ color: 'white' }}>Create Account</Text>
-          </Button>
-          <Text style={{ marginTop: 10 }}>Already have an account?</Text>
-          <TouchableOpacity onPress={() => console.log('press sign in')}>
-            <Text style={styles.accountSignin}>Sign In</Text>
-          </TouchableOpacity>
-        </View>
+        {userLoggedIn ? (
+          <View style={styles.accountView}>
+            <Button
+              mode="contained"
+              color={Colors.orange800}
+              onPress={() => {
+                console.log('press create account');
+              }}
+            >
+              <Text style={{ color: 'white' }}>Create Account</Text>
+            </Button>
+            <Text style={{ marginTop: 10 }}>Already have an account?</Text>
+            <TouchableOpacity onPress={() => console.log('press sign in')}>
+              <Text style={styles.accountSignin}>Sign In</Text>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <View style={styles.accountView}>
+            <Button
+              mode="contained"
+              color={Colors.orange800}
+              onPress={() => {
+                console.log('Checkout');
+              }}
+            >
+              <Text style={{ color: 'white' }}>Checkout</Text>
+            </Button>
+          </View>
+        )}
       </View>
     </View>
   );
