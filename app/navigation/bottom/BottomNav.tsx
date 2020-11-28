@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Bartender from '../../screens/Bartender';
+import Bartender from '../../screens/bartender/Bartender';
 import Favorites from '../../screens/favorites/Favorites';
 import Search from '../../screens/Search/Search';
 import ProductsNav from '../products/ProductsStack';
