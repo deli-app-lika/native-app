@@ -1,4 +1,5 @@
 import {
+  ADD_TO_CART,
   LOG_OUT,
   UPDATE_USER,
   UPDATE_USER_LOCATION
@@ -8,7 +9,8 @@ import { IAnonymousUser, IUser } from '../models/user';
 const initialState: IAnonymousUser | IUser = {
   isNewUser: true,
   isLoggedIn: false,
-  location: { long: null, lat: null }
+  location: { long: null, lat: null },
+  cart: []
 };
 
 interface IAction {
@@ -37,6 +39,12 @@ const auth = (state = initialState, action: IAction) => {
     case LOG_OUT: {
       return { ...initialState, location: action.data };
     }
+    case ADD_TO_CART:
+      console.log('in cart reducer', action.data);
+      return {
+        ...state,
+        cart: { ...state.cart, ...action.data }
+      };
     default:
       return state;
   }

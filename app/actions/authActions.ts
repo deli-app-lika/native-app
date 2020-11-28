@@ -4,6 +4,7 @@ export const SET_AUTH = 'SET_AUTH';
 export const LOG_OUT = 'LOG_OUT';
 export const UPDATE_USER = 'UPDATE_USER';
 export const UPDATE_USER_LOCATION = 'UPDATE_USER_LOCATION';
+export const ADD_TO_CART = 'ADD_TO_CART';
 
 export const setAuth = () => ({
   type: SET_AUTH
@@ -28,4 +29,9 @@ export const logout = (location: {
 }) => ({
   type: LOG_OUT,
   data: location
+});
+
+export const addToCart = (data: any) => ({
+  type: ADD_TO_CART,
+  data
 });
