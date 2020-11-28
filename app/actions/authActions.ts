@@ -5,7 +5,8 @@ export const SET_AUTH = 'SET_AUTH';
 export const LOG_OUT = 'LOG_OUT';
 export const UPDATE_USER = 'UPDATE_USER';
 export const UPDATE_USER_LOCATION = 'UPDATE_USER_LOCATION';
-export const ADD_TO_CART = 'ADD_TO_CART';
+export const ADD_NEW_ITEM_TO_CART = 'ADD_NEW_ITEM_TO_CART';
+export const UPDATE_ITEM_QTY_CART = 'UPDATE_ITEM_QTY_CART';
 
 export const setAuth = () => ({
   type: SET_AUTH
@@ -32,7 +33,19 @@ export const logout = (location: {
   data: location
 });
 
-export const addToCart = (data: ICartItem[]) => ({
-  type: ADD_TO_CART,
+// cart actions
+export const addNewItemToCart = (data: ICartItem[]) => ({
+  type: ADD_NEW_ITEM_TO_CART,
   data
 });
+
+export const updateItemQtyCart = (data: {
+  cartItem: ICartItem;
+  addQty: number;
+}) => {
+  console.log('in action update cart item');
+  return {
+    type: UPDATE_ITEM_QTY_CART,
+    data
+  };
+};

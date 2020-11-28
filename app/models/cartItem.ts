@@ -11,5 +11,5 @@ export interface ICartItem {
   size?: number;
   unit?: string;
   invID?: string;
-  purchaseQuantity: number;
+  purchaseQuantity?: number;
 }

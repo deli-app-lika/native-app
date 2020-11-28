@@ -8,14 +8,16 @@ import {
   IconButton,
   Text
 } from 'react-native-paper';
-import { useDispatch } from 'react-redux';
-import { addToCart } from '../../actions/authActions';
+import { useDispatch, useSelector } from 'react-redux';
+import { addNewItemToCart, updateItemQtyCart } from '../../actions/authActions';
+import { ICartItem } from '../../models/cartItem';
 import { IIngredientInv } from '../../models/IngredientInvtory';
 import NavigationService from '../../navigation/NavigationService';
 import { BartenderStackNavProps } from '../../navigation/types/BartenderParamList';
 import getIngredients, {
   cleanResults
 } from '../../services/api/ingredients/ingredients';
+import { AppState } from '../../store/configureStore';
 import styles from './styles';
 
 // interface CocktailProps {
@@ -27,6 +29,9 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
   const { params } = route;
   const { height } = Dimensions.get('window');
   const { width } = Dimensions.get('window');
+  const cart = useSelector(
+    (state: AppState) => state.default.cart as ICartItem[]
+  );
   const dispatch = useDispatch();
 
   const fetchInventory = useCallback(async () => {
@@ -98,13 +103,37 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
   });
 
   const handleAddToCart = () => {
-    const templist = ingredientsList
+    console.log('cart yooooooooooooo', cart);
+    const newCartItems: ICartItem[] = [];
+    ingredientsList
       .filter((itemIngredient: IIngredientInv) => !itemIngredient.outOfStock)
-      .map((itemIngredient: IIngredientInv) => {
-        return { ...itemIngredient, purchaseQuantity: 1 };
+      .forEach((ingredient: IIngredientInv) => {
+        // check if item is already in the cart
+        if (
+          cart.some(
+            (cartItem) =>
+              cartItem.invID === ingredient.invID &&
+              cartItem.itemId === ingredient.itemId
+          )
+        ) {
+          console.log('update item in cart');
+          dispatch(updateItemQtyCart({ cartItem: ingredient, addQty: 1 }));
+        } else {
+          newCartItems.push({ ...ingredient, purchaseQuantity: 1 });
+          console.log('add item to cart');
+        }
       });
-    console.log('templist', templist);
-    return templist;
+    if (newCartItems.length > 0) {
+      dispatch(addNewItemToCart(newCartItems));
+    }
+    // const templist = ingredientsList
+    //   .filter((itemIngredient: IIngredientInv) => !itemIngredient.outOfStock)
+    //   .map((itemIngredient: IIngredientInv) => {
+    //     return { ...itemIngredient, purchaseQuantity: 1 };
+    //   });
+    // console.log('templist', templist);
+    // // return templist;
+    // dispatch(addToCart(templist));
   };
 
   useEffect(() => {
@@ -149,7 +178,7 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
           <TouchableOpacity
             onPress={() => {
               console.log('pressed add to cart');
-              dispatch(addToCart(handleAddToCart()));
+              handleAddToCart();
               // NavigationService.navigate('Cart', params);
             }}
           >
