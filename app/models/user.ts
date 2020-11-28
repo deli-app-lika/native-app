@@ -17,25 +17,26 @@ export interface IUser {
     long: number | null;
     lat: number | null;
   };
-  cart: ICartItem[];
+  cart: {
+    cart: ICartItem[];
+    cost: ICart;
+  };
 }
 
 export interface IAnonymousUser {
   isNewUser: true;
   isLoggedIn: false;
   location: ILocation;
-  cart: ICartItem[];
+  cart: {
+    cart: ICartItem[];
+    cost: ICart;
+  };
 }
-// everything except provider data and provider id.
-// const FireBase user auth example = {
-//   uid: 'YNtC34lIi7dvD8C1GK3to0pIuMc2',
-//   metadata: {creationTime: 1601443097071, lastSignInTime: 1601443097071},
-//   providerId: 'firebase',
-//   photoURL: null,
-//   emailVerified: false,
-//   providerData: [],
-//   email: null,
-//   isAnonymous: true,
-//   displayName: null,
-//   phoneNumber: null,
-// };
+
+export interface ICart {
+  subTotal: number;
+  estimatedTax: number;
+  deliveryFee: number;
+  serviceFee: number;
+  estimatedTotal: number;
+}

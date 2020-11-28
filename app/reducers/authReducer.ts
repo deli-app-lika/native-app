@@ -12,7 +12,16 @@ const initialState: IAnonymousUser | IUser = {
   isNewUser: true,
   isLoggedIn: false,
   location: { long: null, lat: null },
-  cart: []
+  cart: {
+    cart: [],
+    cost: {
+      subTotal: 5,
+      deliveryFee: 5,
+      estimatedTax: 5,
+      serviceFee: 5,
+      estimatedTotal: 20
+    }
+  }
 };
 
 interface IAction {
@@ -50,27 +59,33 @@ const auth = (state = initialState, action: IAction) => {
     case ADD_NEW_ITEM_TO_CART:
       return {
         ...state,
-        // @ts-ignore
-        cart: [...state.cart, ...action.data]
+        cart: {
+          cost: state.cart.cost,
+          // @ts-ignore
+          cart: [...state.cart.cart, ...action.data]
+        }
       };
     case UPDATE_ITEM_QTY_CART:
       return {
         ...state,
-        cart: state.cart.map((item) => {
-          if (
-            // @ts-ignore
-            item.invID === action.data.cartItem.invID &&
-            // @ts-ignore
-            item.itemId === action.data.cartItem.itemId
-          ) {
-            return {
-              ...item,
+        cart: {
+          cost: state.cart.cost,
+          cart: state.cart.cart.map((item) => {
+            if (
               // @ts-ignore
-              purchaseQuantity: item.purchaseQuantity + action.data.addQty
-            };
-          }
-          return item;
-        })
+              item.invID === action.data.cartItem.invID &&
+              // @ts-ignore
+              item.itemId === action.data.cartItem.itemId
+            ) {
+              return {
+                ...item,
+                // @ts-ignore
+                purchaseQuantity: item.purchaseQuantity + action.data.addQty
+              };
+            }
+            return item;
+          })
+        }
       };
     default:
       return state;
