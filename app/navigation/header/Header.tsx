@@ -1,8 +1,7 @@
 import * as React from 'react';
-
-import { Colors, IconButton, Text } from 'react-native-paper';
-
 import { View } from 'react-native';
+import { Colors, IconButton, Text } from 'react-native-paper';
+import NavigationService from '../NavigationService';
 import styles from './styles';
 
 interface HeaderProps {
@@ -14,7 +13,10 @@ const LikaHeader: React.FC<HeaderProps> = ({ navigation }) => {
     navigation.openDrawer();
   };
 
-  const onCartCLicked = () => console.log('Cart Clicked');
+  const onCartCLicked = () => {
+    console.log('Cart Clicked');
+    NavigationService.navigate('Cart');
+  };
 
   return (
     <View style={styles.Container}>
