@@ -37,15 +37,11 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
   const fetchInventory = useCallback(async () => {
     try {
       const temp = await getIngredients(params);
-      console.log('temp', temp);
-
       const done = await Promise.all(temp).then((data) => {
         // @ts-ignore
         const doneData = cleanResults(data);
-        console.log('actually done', doneData);
         return doneData;
       });
-      console.log('done yoooooooo');
       // @ts-ignore
       setIngredientsList(done);
     } catch (e) {
@@ -55,8 +51,6 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
   }, []);
 
   const renderIngredients = ingredientsList.map((ingre: IIngredientInv) => {
-    console.log('ingre===', ingre);
-
     const inventoryItem = {
       category: ingre.category,
       image: ingre.image,
@@ -72,7 +66,6 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
       <TouchableOpacity
         key={ingre.itemId}
         onPress={() => {
-          console.log('on press ingredient');
           NavigationService.navigate('Item', inventoryItem);
           // route.navigation.navigate('Cocktail');
         }}
@@ -103,7 +96,6 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
   });
 
   const handleAddToCart = () => {
-    console.log('cart yooooooooooooo', cart);
     const newCartItems: ICartItem[] = [];
     ingredientsList
       .filter((itemIngredient: IIngredientInv) => !itemIngredient.outOfStock)
@@ -138,7 +130,6 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
 
   useEffect(() => {
     fetchInventory();
-    console.log('ready list yo', ingredientsList);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
