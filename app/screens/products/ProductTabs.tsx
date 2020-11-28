@@ -32,6 +32,7 @@ function CategoryTabs({ pressCategoryHandler }: any) {
   return (
     <ScrollableTabView
       style={styles.scrollableTabView}
+      locked
       initialPage={0}
       tabBarInactiveTextColor={Colors.orange800}
       tabBarActiveTextColor={Colors.red700}

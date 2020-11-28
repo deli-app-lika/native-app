@@ -40,6 +40,7 @@ function CategoryTabs({ pressCategoryHandler }: any) {
       style={{
         marginTop: 20
       }}
+      locked
       initialPage={0}
       tabBarInactiveTextColor="green"
       tabBarUnderlineStyle={{}}
