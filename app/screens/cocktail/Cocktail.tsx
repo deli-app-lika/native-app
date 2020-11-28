@@ -8,6 +8,8 @@ import {
   IconButton,
   Text
 } from 'react-native-paper';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../actions/cartActions';
 import { IIngredientInv } from '../../models/IngredientInvtory';
 import NavigationService from '../../navigation/NavigationService';
 import { BartenderStackNavProps } from '../../navigation/types/BartenderParamList';
@@ -25,6 +27,8 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
   const { params } = route;
   const { height } = Dimensions.get('window');
   const { width } = Dimensions.get('window');
+
+  const dispatch = useDispatch();
 
   const fetchInventory = useCallback(async () => {
     try {
@@ -94,6 +98,16 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
     );
   });
 
+  const handleAddToCart = () => {
+    const templist = ingredientsList
+      .filter((itemIngredient: IIngredientInv) => !itemIngredient.outOfStock)
+      .map((itemIngredient: IIngredientInv) => {
+        return { ...itemIngredient, purchaseQuantity: 1 };
+      });
+    console.log('templist', templist);
+    return templist;
+  };
+
   useEffect(() => {
     fetchInventory();
     console.log('ready list yo', ingredientsList);
@@ -136,6 +150,7 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
           <TouchableOpacity
             onPress={() => {
               console.log('pressed add to cart');
+              dispatch(addToCart(handleAddToCart()));
               // NavigationService.navigate('Cart', params);
             }}
           >
@@ -158,7 +173,7 @@ const Cocktail: React.FC<BartenderStackNavProps<'Cocktail'>> = ({ route }) => {
       <View style={styles.directionText}>
         <Text style={styles.textDisplay}>Directions</Text>
         <View style={styles.cartButton}>
-          <TouchableOpacity onPress={() => console.log('pressed')}>
+          <TouchableOpacity onPress={() => console.log('pressed share button')}>
             <Text style={styles.buttonText}>Share</Text>
           </TouchableOpacity>
         </View>
