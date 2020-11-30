@@ -50,6 +50,7 @@
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
     "rn-faded-scrollview": "^1.0.8",
+    "tipsi-stripe": "8.0.0-beta.11",
     "use-memo-one": "^1.1.1",
     "yarn": "^1.22.10",
     "yup": "^0.31.0"

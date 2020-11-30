@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import { ScrollView, TouchableOpacity, View } from 'react-native';
+import stripe from 'tipsi-stripe';
 import { Text, TextInput } from 'react-native-paper';
 import FastImage from 'react-native-fast-image';
 import cardEntryStyles from './cardEntryStyles';
 
 interface NewCardEntryProps {}
+
+stripe.setOptions({
+  publishableKey:
+    'pk_test_51HsfxdFOGGE0KkkiBf76kJx35CjBu8uRXkmRvM71rIGu2D01zTbSU14K5J1OySuYXmZFtD2Ghn4ycn3hhQObAiQj004cvbd1KC'
+});
 
 const NewCardEntry: React.FC<NewCardEntryProps> = () => {
   const [cardState, setCardState] = useState({
@@ -13,6 +19,70 @@ const NewCardEntry: React.FC<NewCardEntryProps> = () => {
     cardExp: '',
     cardCCV: ''
   });
+
+  const [stripeToken, setStripeToken] = useState('');
+
+  const getToken = async () => {
+    console.log('getting token');
+    const token = await stripe.paymentRequestWithCardForm({
+      // Only iOS support this options
+
+      smsAutofillDisabled: true,
+
+      requiredBillingAddressFields: 'full',
+
+      prefilledInformation: {
+        billingAddress: {
+          name: 'Sayali Sonawane',
+
+          line1: 'Canary Place',
+
+          line2: '3',
+
+          city: 'Macon',
+
+          state: 'Georgia',
+
+          country: 'Estonia',
+
+          postalCode: '31217',
+
+          email: 'sayali.sonawane@mindbowser.com'
+        }
+      }
+    });
+    setStripeToken(token);
+  };
+
+  const firebaseUrl =
+    'https://us-central1-lika-23ab9.cloudfunctions.net/completePaymentWithStripe';
+
+  const doPayment = async () => {
+    console.log('charging');
+    fetch(firebaseUrl, {
+      method: 'POST',
+
+      headers: {
+        Accept: 'application/json',
+
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        amount: 100,
+
+        currency: 'usd',
+
+        stripeToken
+      })
+    })
+      .then((response) => response)
+      .then((responseJson) => {
+        console.log('responseJson', responseJson);
+      })
+      .catch((error) => {
+        console.log('Failed', error);
+      });
+  };
 
   return (
     <View style={cardEntryStyles.container}>
@@ -110,7 +180,13 @@ const NewCardEntry: React.FC<NewCardEntryProps> = () => {
             style={{ ...cardEntryStyles.inputField }}
           />
         </View>
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity
+          onPress={async () => {
+            console.log('click pay');
+            await getToken();
+            await doPayment();
+          }}
+        >
           <View style={cardEntryStyles.submitButton}>
             <Text
               style={{

@@ -2,10 +2,16 @@ import { Text, View } from 'react-native';
 
 import React from 'react';
 import { Colors, IconButton } from 'react-native-paper';
+import stripe from 'tipsi-stripe';
 import styles from './styles';
 import NavigationService from '../../navigation/NavigationService';
 
 interface PaymentsProps {}
+
+stripe.setOptions({
+  publishableKey:
+    'pk_test_51HsfxdFOGGE0KkkiBf76kJx35CjBu8uRXkmRvM71rIGu2D01zTbSU14K5J1OySuYXmZFtD2Ghn4ycn3hhQObAiQj004cvbd1KC'
+});
 
 const Payments: React.FC<PaymentsProps> = () => {
   return (
