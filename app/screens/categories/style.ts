@@ -11,7 +11,8 @@ const styles = StyleSheet.create({
   },
   ScrollView: {
     // backgroundColor: 'pink',
-    marginHorizontal: 20
+    // marginHorizontal: 0
+    marginLeft: 20
   },
   Thumbnail: {
     marginTop: 20,

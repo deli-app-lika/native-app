@@ -1,9 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { SafeAreaView, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView, ScrollView, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
-// import {ScrollView} from 'react-native-gesture-handler';
 import { ActivityIndicator, Colors, Text } from 'react-native-paper';
-import ScrollView from 'rn-faded-scrollview';
 import { ICocktail } from '../../models/cocktail';
 import NavigationService from '../../navigation/NavigationService';
 import { getCategoryCocktails } from '../../services/api/cocktails/categories';
@@ -61,19 +59,8 @@ const Categories: React.FC<CategoriesProps> = ({ category }) => {
   });
 
   return (
-    // <View style={styles.container}>{renderCocktails}</View>
-
     <SafeAreaView style={styles.ScrollViewContianer}>
-      <ScrollView
-        allowStartFade
-        fadeSize={180}
-        fadeColors={[
-          'rgba(255, 160, 122, 0.18)',
-          'rgba(250,128,114, 0.6)',
-          'rgba(233,150,122, 0.9)'
-        ]}
-        style={styles.ScrollView}
-      >
+      <ScrollView style={styles.ScrollView}>
         <View style={styles.container}>{renderCocktails}</View>
       </ScrollView>
     </SafeAreaView>
