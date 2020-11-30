@@ -5,9 +5,7 @@ import { ICocktail, IIngredients } from '../../../models/cocktail';
 
 export const cleanResults = (
   results: Promise<{
-    response: FirebaseFirestoreTypes.QuerySnapshot<
-      FirebaseFirestoreTypes.DocumentData
-    >;
+    response: FirebaseFirestoreTypes.QuerySnapshot<FirebaseFirestoreTypes.DocumentData>;
     ingre: IIngredients;
   }>[]
 ) => {
